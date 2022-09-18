@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  backend:
+    container_name: backend
+    image: hajime/backend:latest
+    ports:
+      - "7777:8080"
+
+  frontend:
+    container_name: frontend
+    image: hajime/frontend:latest
+    command: npm start
+    ports:
+      - "3000:3000"
+    environment:
+      REACT_APP_BACKEND_API_BASE_URL: "http://localhost:7777"
+    depends_on:
+      - backend
