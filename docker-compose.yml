@@ -2,14 +2,17 @@ version: '3.8'
 services:
   backend:
     container_name: backend
-    image: hajime/backend:latest
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     ports:
       - "7777:8080"
 
   frontend:
     container_name: frontend
-    image: hajime/frontend:latest
-    command: npm start
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     environment:

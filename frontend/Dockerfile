@@ -1,5 +1,15 @@
 FROM node:15.13-alpine
 WORKDIR /frontend
 ENV PATH="./node_modules/.bin:$PATH"
-COPY . .
-RUN npm run build
+
+# install app dependencies
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm install --silent
+RUN npm install react-scripts@3.4.1 -g --silent
+
+# add app
+COPY . ./
+
+# start app
+CMD ["npm", "start"]
