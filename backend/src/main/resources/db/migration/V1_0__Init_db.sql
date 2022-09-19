@@ -1,5 +1,6 @@
 create table users (
 id uuid not null,
+user_type varchar(255) not null ,
 is_account_non_expired boolean not null,
 is_account_non_locked boolean not null,
 is_credentials_non_expired boolean not null,
