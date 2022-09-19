@@ -1,4 +1,4 @@
-package com.hajime.backend.controller;
+package by.bsuir.greenfood.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
