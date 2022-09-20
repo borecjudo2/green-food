@@ -1,8 +1,7 @@
 package by.bsuir.greenfood.controller;
 
-import by.bsuir.greenfood.model.dto.Dish;
-import by.bsuir.greenfood.model.enums.DishType;
-import by.bsuir.greenfood.service.DishService;
+import by.bsuir.greenfood.model.dto.User;
+import by.bsuir.greenfood.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -27,45 +26,39 @@ import javax.validation.Valid;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping("/dishes")
+@RequestMapping("/users")
 @RequiredArgsConstructor
-public class DishController {
+public class UserController {
 
-  private final DishService dishService;
+  private final UserService userService;
 
   @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.CREATED)
-  public Dish createDish(@Valid @RequestBody Dish dish) {
-    return dishService.createDish(dish);
+  public User createUser(@Valid @RequestBody User user) {
+    return userService.createUser(user);
   }
 
   @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.OK)
-  public Dish updateDish(@Valid @RequestBody Dish dish) {
-    return dishService.updateDish(dish);
+  public User updateUser(@Valid @RequestBody User user) {
+    return userService.updateUser(user);
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.OK)
-  public List<Dish> getDishes() {
-    return dishService.getDishes();
-  }
-
-  @GetMapping(value = "/{dishType}", produces = MediaType.APPLICATION_JSON_VALUE)
-  @ResponseStatus(HttpStatus.OK)
-  public List<Dish> getDishesByDishType(@PathVariable DishType dishType) {
-    return dishService.getDishesByDishType(dishType);
+  public List<User> getUsers() {
+    return userService.getUsers();
   }
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.OK)
-  public Dish getDishesById(@PathVariable UUID id) {
-    return dishService.getDishById(id);
+  public User getUserById(@PathVariable UUID id) {
+    return userService.getUserById(id);
   }
 
   @DeleteMapping(value = "/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteDishById(@PathVariable UUID id) {
-    dishService.deleteDishById(id);
+  public void deleteUserById(@PathVariable UUID id) {
+    userService.deleteUser(id);
   }
 }

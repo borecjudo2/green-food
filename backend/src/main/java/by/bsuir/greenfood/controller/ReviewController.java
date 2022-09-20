@@ -1,8 +1,7 @@
 package by.bsuir.greenfood.controller;
 
-import by.bsuir.greenfood.model.dto.Dish;
-import by.bsuir.greenfood.model.enums.DishType;
-import by.bsuir.greenfood.service.DishService;
+import by.bsuir.greenfood.model.dto.Review;
+import by.bsuir.greenfood.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -27,45 +26,45 @@ import javax.validation.Valid;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping("/dishes")
+@RequestMapping("/reviews")
 @RequiredArgsConstructor
-public class DishController {
+public class ReviewController {
 
-  private final DishService dishService;
+  private final ReviewService reviewService;
 
   @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.CREATED)
-  public Dish createDish(@Valid @RequestBody Dish dish) {
-    return dishService.createDish(dish);
+  public Review createReview(@Valid @RequestBody Review review) {
+    return reviewService.createReview(review);
   }
 
   @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.OK)
-  public Dish updateDish(@Valid @RequestBody Dish dish) {
-    return dishService.updateDish(dish);
+  public Review updateReview(@Valid @RequestBody Review review) {
+    return reviewService.updateReview(review);
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.OK)
-  public List<Dish> getDishes() {
-    return dishService.getDishes();
+  public List<Review> getReviews() {
+    return reviewService.getReviews();
   }
 
-  @GetMapping(value = "/{dishType}", produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(value = "/commenter/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.OK)
-  public List<Dish> getDishesByDishType(@PathVariable DishType dishType) {
-    return dishService.getDishesByDishType(dishType);
+  public List<Review> getReviewsByCommenterId(@PathVariable UUID id) {
+    return reviewService.getReviewsByCommenterId(id);
   }
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.OK)
-  public Dish getDishesById(@PathVariable UUID id) {
-    return dishService.getDishById(id);
+  public Review getReviewById(@PathVariable UUID id) {
+    return reviewService.getReviewById(id);
   }
 
   @DeleteMapping(value = "/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteDishById(@PathVariable UUID id) {
-    dishService.deleteDishById(id);
+  public void deleteUReviewById(@PathVariable UUID id) {
+    reviewService.deleteReview(id);
   }
 }

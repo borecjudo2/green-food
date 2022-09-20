@@ -1,8 +1,7 @@
 package by.bsuir.greenfood.controller;
 
-import by.bsuir.greenfood.model.dto.Dish;
-import by.bsuir.greenfood.model.enums.DishType;
-import by.bsuir.greenfood.service.DishService;
+import by.bsuir.greenfood.model.dto.Order;
+import by.bsuir.greenfood.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -27,45 +26,45 @@ import javax.validation.Valid;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping("/dishes")
+@RequestMapping("/orders")
 @RequiredArgsConstructor
-public class DishController {
+public class OrderController {
 
-  private final DishService dishService;
+  private final OrderService orderService;
 
   @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.CREATED)
-  public Dish createDish(@Valid @RequestBody Dish dish) {
-    return dishService.createDish(dish);
+  public Order createOrder(@Valid @RequestBody Order order) {
+    return orderService.createOrder(order);
   }
 
   @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.OK)
-  public Dish updateDish(@Valid @RequestBody Dish dish) {
-    return dishService.updateDish(dish);
+  public Order updateOrder(@Valid @RequestBody Order order) {
+    return orderService.updateOrder(order);
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.OK)
-  public List<Dish> getDishes() {
-    return dishService.getDishes();
+  public List<Order> getOrders() {
+    return orderService.getOrders();
   }
 
-  @GetMapping(value = "/{dishType}", produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(value = "/owner/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.OK)
-  public List<Dish> getDishesByDishType(@PathVariable DishType dishType) {
-    return dishService.getDishesByDishType(dishType);
+  public List<Order> getOrdersByOwnerId(@PathVariable UUID id) {
+    return orderService.getOrdersByOwnerId(id);
   }
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.OK)
-  public Dish getDishesById(@PathVariable UUID id) {
-    return dishService.getDishById(id);
+  public Order getOrderById(@PathVariable UUID id) {
+    return orderService.getOrderById(id);
   }
 
   @DeleteMapping(value = "/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteDishById(@PathVariable UUID id) {
-    dishService.deleteDishById(id);
+  public void deleteUOrderById(@PathVariable UUID id) {
+    orderService.deleteOrder(id);
   }
 }
