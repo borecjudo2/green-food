@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
 import React from "react";
+import {Navigation} from "../components/Navigation";
 
 export function MainPage() {
     return (
@@ -13,7 +14,11 @@ export function MainPage() {
 
                     </div>
                     <div className="text-black text-2xl pt-7 px-10">
-                        Order your foods at any time and we'll safely delivery them straight to your home and more
+                        <text>
+                            Order your foods at any time and we'll safely delivery them straight to your home and
+                            <strong> MORE</strong>
+                        </text>
+
                     </div>
                     <div className="text-black text-2xl pt-7 px-10">
                         <Link to="/login" className="text-white font-light text-xl bg-black border-8 border-black rounded-3xl
@@ -26,8 +31,9 @@ export function MainPage() {
 
                 </div>
                 <div className="border-black h-[28rem] object-cover">
-                    <img src="https://www.grab.com/ph/wp-content/uploads/sites/12/2018/05/GrabFood-EX-Desktop-HeaderImageV1.jpg"
-                         className="object-cover h-full w-full rounded-r-3xl"/>
+                    <img
+                        src="https://www.grab.com/ph/wp-content/uploads/sites/12/2018/05/GrabFood-EX-Desktop-HeaderImageV1.jpg"
+                        className="object-cover h-full w-full rounded-r-3xl"/>
                 </div>
             </div>
             <div className="bg-black rounded-t-3xl bottom-0 h-max mx-20 mt-20 grid grid-rows-3 text-white p-10">
