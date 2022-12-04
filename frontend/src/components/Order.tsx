@@ -1,10 +1,15 @@
 import React from "react";
-import {DishProps} from "./Dish";
+import {DishProps, IDish} from "./Dish";
 
-export function Order({dish}: DishProps) {
+export interface OrderProps {
+    dish: IDish,
+    count: number
+}
+
+export function Order({dish, count}: OrderProps) {
     return (
         <div className="grid grid-cols-2 gap-5 border-b py-3">
-            <div className="col-span-1">
+            <div className="col-span-1 place-self-center">
                 <img src={dish.iconUrl}
                      className="rounded-xl"/>
             </div>
@@ -15,7 +20,7 @@ export function Order({dish}: DishProps) {
                 <div className="place-self-center">
                     <text className="font-bold text-l">${dish.price}</text>
                     <text> x </text>
-                    <text className="text-l">01</text>
+                    <text className="text-l">{count}</text>
                 </div>
                 <div className="place-self-center">
                     <button className="bg-red-200 hover:bg-red-400 p-2 rounded-xl">

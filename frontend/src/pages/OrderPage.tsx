@@ -159,7 +159,7 @@ export function OrderPage() {
                         <text className="text-xl">Your Order</text>
                     </div>
                     <div className="">
-                        {dishes.map(dish => <Order dish={dish}/>)}
+                        {dishes.map(dish => <Order dish={dish} count={1}/>)}
                     </div>
                     <div className="border-b py-3">
                         <div className="flex justify-between mb-3">

@@ -5,6 +5,7 @@ import {MainPage} from "./pages/MainPage";
 import {Navigation} from "./components/Navigation";
 import {DishesPage} from "./pages/DishesPage";
 import {OrderPage} from "./pages/OrderPage";
+import {ReviewsPage} from "./pages/ReviewsPage";
 
 function App() {
     return (
@@ -13,6 +14,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<MainPage/>}/>
                 <Route path="/dishes" element={<DishesPage/>}/>
+                <Route path="/reviews" element={<ReviewsPage/>}/>
                 <Route path="/orders" element={<OrderPage/>}/>
                 <Route path="/login" element={<LoginPage/>}/>
             </Routes>
