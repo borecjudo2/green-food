@@ -23,6 +23,12 @@ export function Navigation() {
                     <img src="favourite.png" alt="sad" className="inline pb-2 pr-2"/>
                     <text className="inline">Reviews</text>
                 </Link>
+                  <Link to="/orders" className="text-black text-xl mr-20 hover:text-lime-500 border-2 border-lime-500
+                  rounded-3xl px-4 py-1">
+                     <img src="shopping-bag.png" alt="sad" className="object-cover inline pb-2 pr-2 "/>
+                     <text className="inline">Order</text>
+
+                </Link>
                 <Link to="/login" className="text-white font-light text-xl bg-black border-8 border-black rounded-3xl
                 hover:text-lime-500">
                     <text className="p-4">

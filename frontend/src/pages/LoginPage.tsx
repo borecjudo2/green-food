@@ -3,8 +3,8 @@ import React from 'react'
 export function LoginPage() {
     return (
         <div className="grid grid-cols-2 w-full h-screen">
-            <div className="py-28 px-52">
-                <div className="bg-white place-self-center place-self-stretch w-full h-full grid grid-cols-1">
+            <div className="place-self-center">
+                <div className="bg-white place-self-stretch w-full h-[350px] grid grid-cols-1">
                     <div>
                         <text className="font-bold text-4xl">Welcome back</text>
                         <br/>
@@ -15,21 +15,22 @@ export function LoginPage() {
                         <text>Email</text>
                         <br/>
                         <input placeholder="Enter your email"
-                               className="w-full h-10 border-gray-300 border-2 rounded-md"/>
+                               className="w-full h-10 border-gray-300 border-2 rounded-md px-3"/>
                         <br/>
                         <br/>
                         <text>Password</text>
                         <br/>
                         <input placeholder="Enter your password"
-                               className="w-full h-10 border-gray-300 border-2 rounded-md"/>
+                               type="password"
+                               className="w-full h-10 border-gray-300 border-2 rounded-md px-3"/>
                     </div>
                     <div>
-                        <button className="w-full h-10 bg-lime-500 rounded-md">Sign in</button>
+                        <button className="w-full h-10 bg-lime-500 rounded-md hover:text-white">Sign in</button>
                     </div>
 
                 </div>
             </div>
-            <div className="bg-lime-100 p-52 blur-2xl">
+            <div className="bg-lime-100 p-52 blur-2xl w-full h-screen">
                 <img src="blob.svg"/>
             </div>
         </div>
