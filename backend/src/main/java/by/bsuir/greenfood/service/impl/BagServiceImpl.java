@@ -8,6 +8,7 @@ import by.bsuir.greenfood.service.BagService;
 import by.bsuir.greenfood.service.DishService;
 import by.bsuir.greenfood.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,16 +30,27 @@ public class BagServiceImpl implements BagService {
   private final UserService userService;
   private final DishService dishService;
 
+  @Autowired
+  private BagService bagService;
+
   @Override
   @Transactional
   public void createBag(UUID userId, UUID dishId) {
-    userService.getUserById(userId);
-    dishService.getDishById(dishId);
+    Bag bag = bagService.findByUserIdAndDishId(userId, dishId);
 
-    repository.save(new BagEntity(userId, dishId));
+    if (bag != null) {
+      bag.setCount(bag.getCount() + 1);
+      repository.save(mapper.dtoToEntity(bag));
+    } else {
+      userService.getUserById(userId);
+      dishService.getDishById(dishId);
+
+      repository.save(new BagEntity(userId, dishId, 1));
+    }
   }
 
   @Override
+  @Transactional
   public List<Bag> findAllByUserId(UUID userId) {
     return repository.findAllByUserId(userId).stream()
         .map(mapper::entityToDto)
@@ -46,10 +58,11 @@ public class BagServiceImpl implements BagService {
   }
 
   @Override
-  public List<Bag> findAllByUserIdAndDishId(UUID userId, UUID dishId) {
-    return repository.findAllByUserIdAndDishId(userId, dishId).stream()
+  @Transactional
+  public Bag findByUserIdAndDishId(UUID userId, UUID dishId) {
+    return repository.findByUserIdAndDishId(userId, dishId)
         .map(mapper::entityToDto)
-        .toList();
+        .orElse(null);
   }
 
   @Override

@@ -6,15 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.OffsetDateTime;
-import java.util.Set;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -40,12 +37,7 @@ public class OrderEntity {
   @JoinColumn(name = "user_id")
   private UserEntity customer;
 
-  @ManyToMany
-  @JoinTable(
-      name = "order_dish",
-      joinColumns = @JoinColumn(name = "order_id"),
-      inverseJoinColumns = @JoinColumn(name = "dish_id"))
-  private Set<DishEntity> dishes;
+  private String data;
 
   @Column(nullable = false)
   private Double price;

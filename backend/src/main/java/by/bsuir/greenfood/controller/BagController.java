@@ -43,19 +43,19 @@ public class BagController {
 
   @GetMapping(value = "/{dishId}", produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.OK)
-  public List<Bag> findAllByUserId(@PathVariable UUID userId, @PathVariable UUID dishId) {
-    return service.findAllByUserIdAndDishId(userId, dishId);
+  public Bag findByUserIdAndDishId(@PathVariable UUID userId, @PathVariable UUID dishId) {
+    return service.findByUserIdAndDishId(userId, dishId);
   }
 
   @DeleteMapping
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteDishById(@PathVariable UUID userId) {
+  public void deleteAllBagsByUserId(@PathVariable UUID userId) {
     service.deleteAllBagsByUserId(userId);
   }
 
   @DeleteMapping(value = "/{dishId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteDishById(@PathVariable UUID userId, @PathVariable UUID dishId) {
+  public void deleteBag(@PathVariable UUID userId, @PathVariable UUID dishId) {
     service.deleteBag(userId, dishId);
   }
 }

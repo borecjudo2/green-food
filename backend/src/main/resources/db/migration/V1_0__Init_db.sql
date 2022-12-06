@@ -9,13 +9,6 @@ password varchar(255) not null ,
 username varchar(255) not null ,
 primary key (id));
 
-create table reviews (
-id uuid not null,
-review varchar(255) not null,
-review_date timestamp not null,
-user_id uuid not null,
-primary key (id));
-
 create table dishes (
 id uuid not null,
 icon_url varchar(255) not null,
@@ -26,10 +19,10 @@ price float8 not null,
 primary key (id));
 
 create table bags (
-id uuid not null,
+count int4 not null,
 user_id uuid not null,
 dish_id uuid not null,
-primary key (id));
+primary key (user_id, dish_id));
 
 create table orders (
 id uuid not null,
@@ -37,12 +30,15 @@ address varchar(255) not null,
 order_date timestamp not null,
 price float8 not null,
 user_id uuid not null,
+data varchar(65535),
 primary key (id));
 
-create table order_dish (
-order_id uuid not null,
-dish_id uuid not null,
-primary key (order_id, dish_id));
+create table reviews (
+id uuid not null,
+review varchar(255) not null,
+review_date timestamp not null,
+user_id uuid not null,
+primary key (id));
 
 alter table if exists users add constraint UK_r43af9ap4edm43mmtq01oddj6 unique (username);
 
@@ -51,9 +47,6 @@ alter table if exists dishes add constraint UK_r12af9ap4edm43mmtq45oddj1 unique 
 
 alter table if exists bags add constraint UK_r12af9ap4edm43mmtq22oddj1 foreign key (user_id) references users;
 alter table if exists bags add constraint UK_r12af9ap4edm43mmtq33oddj9 foreign key (dish_id) references dishes;
-
-alter table if exists order_dish add constraint FKsxcogiw9xscinh77ixpor5apo foreign key (dish_id) references dishes;
-alter table if exists order_dish add constraint FK1fevhe8ke4l3uebaotqn5ae77 foreign key (order_id) references orders;
 
 alter table if exists orders add constraint FK32ql8ubntj5uh44ph9659tiih foreign key (user_id) references users;
 

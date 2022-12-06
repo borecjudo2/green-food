@@ -17,7 +17,7 @@ public interface BagService {
 
   List<Bag> findAllByUserId(UUID userId);
 
-  List<Bag> findAllByUserIdAndDishId(UUID userId, UUID dishId);
+  Bag findByUserIdAndDishId(UUID userId, UUID dishId);
 
   void deleteAllBagsByUserId(UUID userId);
 

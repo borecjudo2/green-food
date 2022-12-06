@@ -8,8 +8,8 @@ import lombok.Setter;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 /**
@@ -20,6 +20,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "bags")
+@IdClass(BagEntityId.class)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -27,17 +28,11 @@ import javax.persistence.Table;
 public class BagEntity {
 
   @Id
-  @GeneratedValue
-  private UUID id;
-
-  @Column(nullable = false)
   private UUID userId;
 
-  @Column(nullable = false)
+  @Id
   private UUID dishId;
 
-  public BagEntity(UUID userId, UUID dishId) {
-    this.userId = userId;
-    this.dishId = dishId;
-  }
+  @Column(nullable = false)
+  private Integer count;
 }

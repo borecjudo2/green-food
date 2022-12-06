@@ -1,8 +1,11 @@
 package by.bsuir.greenfood.model.dto;
 
 import by.bsuir.greenfood.model.enums.DishType;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.UUID;
 import javax.validation.constraints.NotNull;
 
@@ -13,7 +16,9 @@ import javax.validation.constraints.NotNull;
  * @version 1.0.0
  */
 @Data
-public class Dish {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Dish implements Serializable {
 
   private UUID id;
 

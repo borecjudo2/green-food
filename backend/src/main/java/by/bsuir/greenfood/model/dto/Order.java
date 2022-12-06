@@ -3,7 +3,6 @@ package by.bsuir.greenfood.model.dto;
 import lombok.Data;
 
 import java.time.OffsetDateTime;
-import java.util.Set;
 import java.util.UUID;
 import javax.validation.constraints.NotNull;
 
@@ -21,8 +20,7 @@ public class Order {
   @NotNull
   private User customer;
 
-  @NotNull
-  private Set<Dish> dishes;
+  private String data;
 
   @NotNull
   private Double price;

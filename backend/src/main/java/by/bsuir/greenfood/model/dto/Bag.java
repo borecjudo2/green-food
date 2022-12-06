@@ -13,7 +13,7 @@ import java.util.UUID;
 @Data
 public class Bag {
 
-  private UUID id;
+  private Integer count;
 
   private UUID userId;
 
