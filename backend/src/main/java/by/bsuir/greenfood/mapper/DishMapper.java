@@ -16,7 +16,7 @@ public interface DishMapper {
 
   DishMapper INSTANCE = Mappers.getMapper(DishMapper.class);
 
-  DishEntity dtoToEntity(Dish groupDto);
+  DishEntity dtoToEntity(Dish dto);
 
-  Dish entityToDto(DishEntity group);
+  Dish entityToDto(DishEntity entity);
 }

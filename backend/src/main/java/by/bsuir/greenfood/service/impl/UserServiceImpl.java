@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -62,6 +63,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
   }
 
   @Override
+  @Transactional
   public User getUserById(UUID id) {
     return repository.findById(id).map(mapper::entityToDto)
         .orElseThrow(() -> new UsernameNotFoundException("User not found with id " + id));

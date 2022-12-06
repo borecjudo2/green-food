@@ -16,7 +16,7 @@ public interface ReviewMapper {
 
   ReviewMapper INSTANCE = Mappers.getMapper(ReviewMapper.class);
 
-  ReviewEntity dtoToEntity(Review groupDto);
+  ReviewEntity dtoToEntity(Review dto);
 
-  Review entityToDto(ReviewEntity group);
+  Review entityToDto(ReviewEntity entity);
 }

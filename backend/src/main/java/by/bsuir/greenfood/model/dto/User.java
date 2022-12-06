@@ -18,8 +18,6 @@ public class User {
 
   private UUID id;
 
-  private Set<GrantedAuthority> authorities;
-
   @NotNull
   private String username;
 

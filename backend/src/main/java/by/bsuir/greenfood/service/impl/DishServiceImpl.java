@@ -8,6 +8,7 @@ import by.bsuir.greenfood.repo.DishRepository;
 import by.bsuir.greenfood.service.DishService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -68,6 +69,7 @@ public class DishServiceImpl implements DishService {
   }
 
   @Override
+  @Transactional
   public Dish getDishById(UUID id) {
     return dishRepository.findById(id)
         .map(mapper::entityToDto)

@@ -1,5 +1,6 @@
 package by.bsuir.greenfood.config;
 
+import by.bsuir.greenfood.mapper.BagMapper;
 import by.bsuir.greenfood.mapper.DishMapper;
 import by.bsuir.greenfood.mapper.OrderMapper;
 import by.bsuir.greenfood.mapper.ReviewMapper;
@@ -34,5 +35,10 @@ public class MapperConfig {
   @Bean
   public ReviewMapper reviewMapper() {
     return ReviewMapper.INSTANCE;
+  }
+
+  @Bean
+  public BagMapper bagMapper() {
+    return BagMapper.INSTANCE;
   }
 }

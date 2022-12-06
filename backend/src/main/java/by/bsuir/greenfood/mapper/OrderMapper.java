@@ -16,7 +16,7 @@ public interface OrderMapper {
 
   OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
-  OrderEntity dtoToEntity(Order groupDto);
+  OrderEntity dtoToEntity(Order dto);
 
-  Order entityToDto(OrderEntity group);
+  Order entityToDto(OrderEntity entity);
 }
