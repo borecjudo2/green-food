@@ -1,8 +1,15 @@
 import React from 'react'
 import {Link, useLocation} from 'react-router-dom'
+import {existingUser, getUser, isUser, removeUser, User} from "../model/User";
+import {getOrderCount} from "../model/OrderCount";
 
-export function Navigation() {
+interface NavigationProps {
+    count: number
+}
+
+export function Navigation({count}: NavigationProps) {
     const location = useLocation();
+
     if (location.pathname !== "/login") {
         return (
             <nav className="h-[120px] flex justify-between px-20 bg-white items-center text-white">
@@ -13,7 +20,6 @@ export function Navigation() {
                     <text className="text-black text-3xl">Food</text>
                 </Link>
             </span>
-
                 <span>
                 <Link to="/dishes" className="text-black text-xl mr-20 hover:text-lime-500">
                     <img src="chinese-food.png" alt="sad" className="inline pb-2 pr-2 object-cover h-9"/>
@@ -23,17 +29,29 @@ export function Navigation() {
                     <img src="favourite.png" alt="sad" className="inline pb-2 pr-2"/>
                     <text className="inline">Reviews</text>
                 </Link>
-                  <Link to="/orders" className="text-black text-xl mr-20 hover:text-lime-500 ">
-                     <img src="shopping-bag.png" alt="sad" className="object-cover inline pb-2 pr-2 "/>
-                     <text className="inline">Order</text>
-
-                </Link>
-                <Link to="/login" className="text-white font-light text-xl bg-black border-8 border-black rounded-3xl
+                    {!isUser() ?
+                        <Link to="/login" className="text-white font-light text-xl bg-black border-8 border-black rounded-3xl
                 hover:text-lime-500">
-                    <text className="p-4">
-                        Order now
-                    </text>
-                </Link>
+                            <text className="p-4">
+                                Order now
+                            </text>
+                        </Link>
+                        :
+                        <>
+                            <Link to="/orders" className="text-black text-xl mr-20 hover:text-lime-500 ">
+                                <img src="shopping-bag.png" alt="sad" className="object-cover inline pb-2 pr-2 "/>
+                                <text className="inline">Order {count}</text>
+
+                            </Link>
+                            <Link to="/" className="text-white font-light text-xl bg-black border-8 border-black rounded-3xl
+                hover:text-lime-500" onClick={removeUser}>
+                                <text className="p-4">
+                                    Logout
+                                </text>
+                            </Link>
+                        </>
+
+                    }
             </span>
             </nav>
         )

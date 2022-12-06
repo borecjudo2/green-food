@@ -1,12 +1,16 @@
 import {Dish, IDish} from "../components/Dish";
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import {Menu, Transition} from '@headlessui/react'
 import {Fragment} from "react";
 
 function classNames(...classes: any[]) {
     return classes.filter(Boolean).join(' ')
 }
-export function DishesPage() {
+
+interface DishProps {
+    setCount: (n: number) => void
+}
+
+export function DishesPage({setCount}: DishProps) {
 
     const dishes: IDish[] = [
         {
@@ -74,11 +78,13 @@ export function DishesPage() {
                     <div>
                         <text>All dishes</text>
                     </div>
-                    <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                    <div
+                        className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                         {/* Profile dropdown */}
                         <Menu as="div" className="relative ml-3">
                             <div>
-                                <Menu.Button className="flex rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                <Menu.Button
+                                    className="flex rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                                     <span className="sr-only">Open user menu</span>
                                     <img
                                         className="rounded-xl"
@@ -96,9 +102,10 @@ export function DishesPage() {
                                 leaveFrom="transform opacity-100 scale-100"
                                 leaveTo="transform opacity-0 scale-95"
                             >
-                                <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                <Menu.Items
+                                    className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                     <Menu.Item>
-                                        {({ active }) => (
+                                        {({active}) => (
                                             <a
                                                 href="#"
                                                 className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
@@ -108,7 +115,7 @@ export function DishesPage() {
                                         )}
                                     </Menu.Item>
                                     <Menu.Item>
-                                        {({ active }) => (
+                                        {({active}) => (
                                             <a
                                                 href="#"
                                                 className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
@@ -118,7 +125,7 @@ export function DishesPage() {
                                         )}
                                     </Menu.Item>
                                     <Menu.Item>
-                                        {({ active }) => (
+                                        {({active}) => (
                                             <a
                                                 href="#"
                                                 className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
@@ -135,7 +142,7 @@ export function DishesPage() {
             </div>
             <div className="grid grid-cols-4 gap-20">
                 {dishes.map(dish =>
-                    <Dish dish={dish}/>
+                    <Dish dish={dish} setCount={setCount}/>
                 )}
             </div>
         </div>

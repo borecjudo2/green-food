@@ -4,13 +4,14 @@ import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 /**
  * Configuration class for Spring Security.
@@ -21,30 +22,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
-public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
+public class ApplicationSecurityConfig {
 
   private final PasswordEncoder passwordEncoder;
 
   private final UserDetailsService userDetailsService;
-
-  @Override
-  protected void configure(HttpSecurity http) throws Exception {
-    http
-        .csrf().disable()
-        .authorizeRequests()
-        .antMatchers(HttpMethod.GET, "/dishes")
-        .permitAll()
-        .antMatchers(HttpMethod.POST, "/dishes").hasRole("ADMIN")
-        .anyRequest()
-        .authenticated()
-        .and()
-        .httpBasic();
-  }
-
-  @Override
-  protected void configure(AuthenticationManagerBuilder auth) {
-    auth.authenticationProvider(daoAuthenticationProvider());
-  }
 
   @Bean
   public DaoAuthenticationProvider daoAuthenticationProvider() {
@@ -53,5 +35,29 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     provider.setUserDetailsService(userDetailsService);
 
     return provider;
+  }
+
+  @Bean
+  public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+    AuthenticationManagerBuilder authenticationManagerBuilder =
+        http.getSharedObject(AuthenticationManagerBuilder.class);
+    authenticationManagerBuilder.authenticationProvider(daoAuthenticationProvider());
+    return authenticationManagerBuilder.build();
+  }
+
+  @Bean
+  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    http
+        .csrf().disable()
+        .authorizeHttpRequests(authorize ->
+            authorize.requestMatchers(HttpMethod.GET, "/dishes")
+                .permitAll()
+                .requestMatchers(HttpMethod.POST, "/dishes").hasRole("ADMIN")
+                .anyRequest()
+                .authenticated()
+        )
+        .httpBasic();
+
+    return http.build();
   }
 }

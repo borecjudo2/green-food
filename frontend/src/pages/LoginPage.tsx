@@ -1,6 +1,15 @@
 import React from 'react'
+import {saveUser} from "../model/User";
+import {useNavigate} from "react-router-dom";
 
 export function LoginPage() {
+    const navigate = useNavigate();
+
+    const sighIn = () => {
+        saveUser()
+        navigate("/");
+    }
+
     return (
         <div className="grid grid-cols-2 w-full h-screen">
             <div className="place-self-center">
@@ -25,7 +34,10 @@ export function LoginPage() {
                                className="w-full h-10 border-gray-300 border-2 rounded-md px-3"/>
                     </div>
                     <div>
-                        <button className="w-full h-10 bg-lime-500 rounded-md hover:text-white">Sign in</button>
+                        <button className="w-full h-10 bg-lime-500 rounded-md hover:text-white"
+                                onClick={sighIn}>
+                            Sign in
+                        </button>
                     </div>
 
                 </div>

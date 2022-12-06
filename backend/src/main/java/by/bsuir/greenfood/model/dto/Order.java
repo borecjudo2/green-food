@@ -4,7 +4,7 @@ import lombok.Data;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * DESCRIPTION

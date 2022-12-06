@@ -1,10 +1,11 @@
 import {Link} from "react-router-dom";
 import React from "react";
+import {isUser} from "../model/User";
 
 export function MainPage() {
     return (
         <>
-            <div className="bg-lime-400 h-[28rem] mx-20 mt-10 rounded-3xl grid grid-cols-2">
+            <div className="bg-lime-300 h-[28rem] mx-20 mt-10 rounded-3xl grid grid-cols-2">
                 <div className="h-[28rem] object-contain">
                     <div className="text-black font-bold text-6xl pt-20 px-10">
                         <text>Something hot.</text>
@@ -20,7 +21,8 @@ export function MainPage() {
 
                     </div>
                     <div className="text-black text-2xl pt-7 px-10">
-                        <Link to="/login" className="text-white font-light text-xl bg-black border-8 border-black rounded-3xl
+                        <Link to={isUser() ? "/dishes" : "/login"}
+                              className="text-white font-light text-xl bg-black border-8 border-black rounded-3xl
                 hover:text-lime-500">
                             <text className="p-4">
                                 Order now

@@ -1,3 +1,5 @@
+import {addToOrderCount} from "../model/OrderCount";
+
 export interface IDish {
     name: string,
     iconUrl: string,
@@ -8,11 +10,16 @@ export interface IDish {
 
 export interface DishProps {
     dish: IDish
+    setCount: (n: number) => void
 }
 
-export function Dish({dish}: DishProps) {
-    return(
-        <div className="grid grid-rows-5 h-[300px]">
+export function Dish({dish, setCount}: DishProps) {
+    const set = () => {
+        setCount(1)
+    }
+
+    return (
+        <div className="grid grid-rows-5 h-[300px] border-lime-500">
             <div className="row-span-4 rounded-full">
                 <img className="object-cover h-full w-full rounded-xl" src={dish.iconUrl} alt={dish.name}/>
             </div>
@@ -30,7 +37,8 @@ export function Dish({dish}: DishProps) {
                         <text className="font-light">Dish type: {dish.type}</text>
                     </span>
                     <span>
-                        <button className="bg-lime-400 hover:bg-gray-200 h-8 w-8 rounded-md">
+                        <button className="bg-lime-400 hover:bg-gray-200 h-8 w-8 rounded-md"
+                                onClick={set}>
                             <img src="bag.svg" className="fill-white p-2 object-cover"/>
                         </button>
                     </span>

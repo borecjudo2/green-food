@@ -27,6 +27,9 @@
     <show-object-properties value="true" />
     <loaded-nodes />
   </component>
+  <component name="DBNavigator.Project.DatabaseEditorStateManager">
+    <last-used-providers />
+  </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
@@ -37,7 +40,7 @@
     <retain-sticky-names value="false" />
   </component>
   <component name="DBNavigator.Project.FileConnectionMappingManager">
-    <mapping file-url="file://$PROJECT_DIR$/backend/src/main/resources/db/migration/V1_1__Init_data.sql" connection-id="virtual-postgres-connection" session-id="" current-schema="" />
+    <mapping file-url="file://$PROJECT_DIR$/backend/src/main/resources/db/migration/V1_1__Init_data.sql" connection-id="virtual-postgres-connection" session-id="MAIN" current-schema="" />
     <mapping file-url="file://$PROJECT_DIR$/backend/src/main/resources/db/migration/V1_0__Init_db.sql" connection-id="virtual-postgres-connection" session-id="MAIN" current-schema="" />
   </component>
   <component name="DBNavigator.Project.MethodExecutionManager">
