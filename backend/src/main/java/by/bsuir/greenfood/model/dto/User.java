@@ -1,11 +1,10 @@
 package by.bsuir.greenfood.model.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Set;
 import java.util.UUID;
-import jakarta.validation.constraints.NotNull;
 
 /**
  * DESCRIPTION
@@ -19,12 +18,15 @@ public class User {
   private UUID id;
 
   @NotNull
+  private String iconUrl;
+
+  @NotNull
   private String username;
 
   @NotNull
   private String password;
 
-  private Set<Review> reviews;
+  private Set<UUID> reviews;
 
-  private Set<Order> orders;
+  private Set<UUID> orders;
 }

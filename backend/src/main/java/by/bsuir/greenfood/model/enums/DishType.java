@@ -10,7 +10,8 @@ import java.io.Serializable;
  */
 public enum DishType implements Serializable {
 
-  WOK,
+  PLATTERS,
   SUSHI,
-  SUP
+  SOUP,
+  ROLLS
 }

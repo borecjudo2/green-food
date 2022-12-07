@@ -5,6 +5,7 @@ import by.bsuir.greenfood.service.BagService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import java.util.UUID;
  * @author Vladislav_Karpeka
  * @version 1.0.0
  */
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/users/{userId}/dishes")
 @RequiredArgsConstructor

@@ -45,12 +45,24 @@ public class ApplicationSecurityConfig {
     return authenticationManagerBuilder.build();
   }
 
+  //  @Bean
+  //  public CorsConfigurationSource corsConfigurationSource() {
+  //    CorsConfiguration configuration = new CorsConfiguration();
+  //    configuration.setAllowedOrigins(List.of("http://localhost:3000"));
+  //    //    configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+  //    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+  //    source.registerCorsConfiguration("/**", configuration);
+  //    return source;
+  //  }
+
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http
         .csrf().disable()
         .authorizeHttpRequests(authorize ->
             authorize.requestMatchers(HttpMethod.GET, "/dishes")
+                .permitAll()
+                .requestMatchers(HttpMethod.GET, "/reviews")
                 .permitAll()
                 .requestMatchers(HttpMethod.POST, "/dishes").hasRole("ADMIN")
                 .anyRequest()

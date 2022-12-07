@@ -1,6 +1,9 @@
 package by.bsuir.greenfood.model.entity;
 
 import by.bsuir.greenfood.model.enums.UserType;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.JoinColumn;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -53,6 +56,9 @@ public class UserEntity implements UserDetails {
   private boolean isEnabled;
 
   @Column(nullable = false)
+  private String iconUrl;
+
+  @Column(nullable = false)
   @Enumerated(EnumType.STRING)
   private UserType userType;
 
@@ -62,11 +68,15 @@ public class UserEntity implements UserDetails {
   @Column(nullable = false)
   private String password;
 
-  @OneToMany(mappedBy = "commenter", cascade = CascadeType.ALL)
-  private Set<ReviewEntity> reviews;
+  @ElementCollection(targetClass = UUID.class)
+  @CollectionTable(name = "reviews", joinColumns = @JoinColumn(name = "userId"))
+  @Column(name = "id")
+  private Set<UUID> reviews;
 
-  @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-  private Set<OrderEntity> orders;
+  @ElementCollection(targetClass = UUID.class)
+  @CollectionTable(name = "orders", joinColumns = @JoinColumn(name = "userId"))
+  @Column(name = "id")
+  private Set<UUID> orders;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {

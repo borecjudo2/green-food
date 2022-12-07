@@ -2,9 +2,11 @@ package by.bsuir.greenfood.controller;
 
 import by.bsuir.greenfood.model.dto.Review;
 import by.bsuir.greenfood.service.ReviewService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.UUID;
-import jakarta.validation.Valid;
 
 /**
  * DESCRIPTION
@@ -25,6 +26,7 @@ import jakarta.validation.Valid;
  * @author Vladislav_Karpeka
  * @version 1.0.0
  */
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/reviews")
 @RequiredArgsConstructor

@@ -18,7 +18,7 @@ public class Order {
   private UUID id;
 
   @NotNull
-  private User customer;
+  private UUID userId;
 
   private String data;
 

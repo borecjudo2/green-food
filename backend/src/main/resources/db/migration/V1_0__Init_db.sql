@@ -1,5 +1,6 @@
 create table users (
 id uuid not null,
+icon_url varchar(355) not null,
 user_type varchar(255) not null ,
 is_account_non_expired boolean not null,
 is_account_non_locked boolean not null,
@@ -35,7 +36,7 @@ primary key (id));
 
 create table reviews (
 id uuid not null,
-review varchar(255) not null,
+review varchar(65535) not null,
 review_date timestamp not null,
 user_id uuid not null,
 primary key (id));

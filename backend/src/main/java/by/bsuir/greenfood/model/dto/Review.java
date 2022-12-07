@@ -18,7 +18,7 @@ public class Review {
   private UUID id;
 
   @NotNull
-  private User commenter;
+  private UUID userId;
 
   @NotNull
   private String review;
