@@ -1,66 +1,13 @@
 import React from "react";
-import {IDish} from "../components/Dish";
-import {Order} from "../components/Order";
 
-const dishes: IDish[] = [
-    {
-        name: "Cesar",
-        iconUrl: "https://images.squarespace-cdn.com/content/v1/5f45e8a57835a20bff5deabf/cd0e60e5-0e96-4e55-aa85-11739994e464/1.jpg",
-        type: "Salad",
-        description: "Cesarssss Saladsss",
-        price: 35.2
-    },
-    {
-        name: "Cesar",
-        iconUrl: "https://images.squarespace-cdn.com/content/v1/5f45e8a57835a20bff5deabf/cd0e60e5-0e96-4e55-aa85-11739994e464/1.jpg",
-        type: "Salad",
-        description: "Cesarssss Saladsss",
-        price: 35.0
-    },
-    {
-        name: "Cesar",
-        iconUrl: "https://images.squarespace-cdn.com/content/v1/5f45e8a57835a20bff5deabf/cd0e60e5-0e96-4e55-aa85-11739994e464/1.jpg",
-        type: "Salad",
-        description: "Cesarssss Saladsss",
-        price: 35.2
-    },
-    {
-        name: "Cesar",
-        iconUrl: "https://images.squarespace-cdn.com/content/v1/5f45e8a57835a20bff5deabf/cd0e60e5-0e96-4e55-aa85-11739994e464/1.jpg",
-        type: "Salad",
-        description: "Cesarssss Saladsss",
-        price: 35.2
-    },
-    {
-        name: "Cesar",
-        iconUrl: "https://images.squarespace-cdn.com/content/v1/5f45e8a57835a20bff5deabf/cd0e60e5-0e96-4e55-aa85-11739994e464/1.jpg",
-        type: "Salad",
-        description: "Cesarssss Saladsss",
-        price: 35.2
-    },
-    {
-        name: "Cesar",
-        iconUrl: "https://images.squarespace-cdn.com/content/v1/5f45e8a57835a20bff5deabf/cd0e60e5-0e96-4e55-aa85-11739994e464/1.jpg",
-        type: "Salad",
-        description: "Cesarssss Saladsss",
-        price: 35.0
-    },
-    {
-        name: "Cesar",
-        iconUrl: "https://images.squarespace-cdn.com/content/v1/5f45e8a57835a20bff5deabf/cd0e60e5-0e96-4e55-aa85-11739994e464/1.jpg",
-        type: "Salad",
-        description: "Cesarssss Saladsss",
-        price: 35.2
-    },
-    {
-        name: "Cesar",
-        iconUrl: "https://images.squarespace-cdn.com/content/v1/5f45e8a57835a20bff5deabf/cd0e60e5-0e96-4e55-aa85-11739994e464/1.jpg",
-        type: "Salad",
-        description: "Cesarssss Saladsss",
-        price: 35.2
-    }
-]
+import {Order} from "../components/Order";
+import {useOrders} from "../hooks/orders";
+
+
 export function OrderPage() {
+    const {orders, getOrders, getDishSum, removeFromOrder} = useOrders()
+
+
     return (
         <div className="m-20 grid grid-cols-3 gap-5 flex items-start">
             <div className="rounded-xl col-span-2 border-lime-400 border">
@@ -73,9 +20,8 @@ export function OrderPage() {
                              <text>LOGIN</text>
                         </div>
                         <div className="ml-4">
-                             <img src="tick.png" />
+                             <img src="tick.png"/>
                         </div>
-
 
                     </span>
 
@@ -155,11 +101,14 @@ export function OrderPage() {
 
             <div className="rounded-xl col-span-1 p-6 border-lime-400 border">
                 <div className="bg-white w-full h-full">
-                    <div className="border-b py-3">
+                    <div className="py-3 animate-bounce">
                         <text className="text-xl">Your Order</text>
                     </div>
-                    <div className="">
-                        {dishes.map(dish => <Order dish={dish} count={1}/>)}
+                    <div className="border-t">
+                        {orders.map(order =>
+                            <Order order={order}
+                                   key={order.dish.id}
+                                   onDelete={removeFromOrder}/>)}
                     </div>
                     <div className="border-b py-3">
                         <div className="flex justify-between mb-3">
@@ -185,7 +134,7 @@ export function OrderPage() {
                                 <text className="font-bold text-3xl">Total</text>
                             </span>
                             <span>
-                                <text className="font-bold text-3xl">$170</text>
+                                <text className="font-bold text-3xl">${getDishSum()}</text>
                             </span>
                         </div>
                     </div>

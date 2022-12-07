@@ -1,12 +1,4 @@
-import {addToOrderCount} from "../model/OrderCount";
-
-export interface IDish {
-    name: string,
-    iconUrl: string,
-    type: string,
-    description: string,
-    price: number
-}
+import {IDish} from "../model/Dish";
 
 export interface DishProps {
     dish: IDish
@@ -34,7 +26,7 @@ export function Dish({dish, setCount}: DishProps) {
                 </div>
                 <div className="flex justify-between">
                     <span>
-                        <text className="font-light">Dish type: {dish.type}</text>
+                        <text className="font-light">Dish type: {dish.dishType}</text>
                     </span>
                     <span>
                         <button className="bg-lime-400 hover:bg-gray-200 h-8 w-8 rounded-md"

@@ -9,6 +9,10 @@ import {ReviewsPage} from "./pages/ReviewsPage";
 
 function App() {
     const [count, setCount] = useState(0);
+
+    localStorage.setItem('userId', 'e03a1618-f42f-4579-b006-e45f02b201ba');
+    localStorage.setItem('credentials', 'dXNlcjp1c2Vy');
+
     return (
         <>
             <Navigation  count={count}/>

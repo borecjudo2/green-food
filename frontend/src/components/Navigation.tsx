@@ -1,7 +1,6 @@
 import React from 'react'
 import {Link, useLocation} from 'react-router-dom'
-import {existingUser, getUser, isUser, removeUser, User} from "../model/User";
-import {getOrderCount} from "../model/OrderCount";
+import {useOrdersCount} from "../hooks/ordersCount";
 
 interface NavigationProps {
     count: number
@@ -9,6 +8,8 @@ interface NavigationProps {
 
 export function Navigation({count}: NavigationProps) {
     const location = useLocation();
+
+    const {ordersCount} = useOrdersCount()
 
     if (location.pathname !== "/login") {
         return (
@@ -29,29 +30,16 @@ export function Navigation({count}: NavigationProps) {
                     <img src="favourite.png" alt="sad" className="inline pb-2 pr-2"/>
                     <text className="inline">Reviews</text>
                 </Link>
-                    {!isUser() ?
-                        <Link to="/login" className="text-white font-light text-xl bg-black border-8 border-black rounded-3xl
+                <Link to="/orders" className="text-black text-xl mr-20 hover:text-lime-500 ">
+                                <img src="shopping-bag.png" alt="sad" className="object-cover inline pb-2 pr-2 "/>
+                                <text className="inline">Order {ordersCount}</text>
+                </Link>
+                <Link to="/login" className="text-white font-light text-xl bg-black border-8 border-black rounded-3xl
                 hover:text-lime-500">
                             <text className="p-4">
                                 Order now
                             </text>
-                        </Link>
-                        :
-                        <>
-                            <Link to="/orders" className="text-black text-xl mr-20 hover:text-lime-500 ">
-                                <img src="shopping-bag.png" alt="sad" className="object-cover inline pb-2 pr-2 "/>
-                                <text className="inline">Order {count}</text>
-
-                            </Link>
-                            <Link to="/" className="text-white font-light text-xl bg-black border-8 border-black rounded-3xl
-                hover:text-lime-500" onClick={removeUser}>
-                                <text className="p-4">
-                                    Logout
-                                </text>
-                            </Link>
-                        </>
-
-                    }
+                </Link>
             </span>
             </nav>
         )

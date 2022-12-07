@@ -1,6 +1,7 @@
-import {Dish, IDish} from "../components/Dish";
+import {Dish} from "../components/Dish";
 import {Menu, Transition} from '@headlessui/react'
 import {Fragment} from "react";
+import {useDishes} from "../hooks/dishes";
 
 function classNames(...classes: any[]) {
     return classes.filter(Boolean).join(' ')
@@ -11,65 +12,7 @@ interface DishProps {
 }
 
 export function DishesPage({setCount}: DishProps) {
-
-    const dishes: IDish[] = [
-        {
-            name: "Cesar",
-            iconUrl: "https://images.squarespace-cdn.com/content/v1/5f45e8a57835a20bff5deabf/cd0e60e5-0e96-4e55-aa85-11739994e464/1.jpg",
-            type: "Salad",
-            description: "Cesarssss Saladsss",
-            price: 35.2
-        },
-        {
-            name: "Cesar",
-            iconUrl: "https://images.squarespace-cdn.com/content/v1/5f45e8a57835a20bff5deabf/cd0e60e5-0e96-4e55-aa85-11739994e464/1.jpg",
-            type: "Salad",
-            description: "Cesarssss Saladsss",
-            price: 35.0
-        },
-        {
-            name: "Cesar",
-            iconUrl: "https://images.squarespace-cdn.com/content/v1/5f45e8a57835a20bff5deabf/cd0e60e5-0e96-4e55-aa85-11739994e464/1.jpg",
-            type: "Salad",
-            description: "Cesarssss Saladsss",
-            price: 35.2
-        },
-        {
-            name: "Cesar",
-            iconUrl: "https://images.squarespace-cdn.com/content/v1/5f45e8a57835a20bff5deabf/cd0e60e5-0e96-4e55-aa85-11739994e464/1.jpg",
-            type: "Salad",
-            description: "Cesarssss Saladsss",
-            price: 35.2
-        },
-        {
-            name: "Cesar",
-            iconUrl: "https://images.squarespace-cdn.com/content/v1/5f45e8a57835a20bff5deabf/cd0e60e5-0e96-4e55-aa85-11739994e464/1.jpg",
-            type: "Salad",
-            description: "Cesarssss Saladsss",
-            price: 35.2
-        },
-        {
-            name: "Cesar",
-            iconUrl: "https://images.squarespace-cdn.com/content/v1/5f45e8a57835a20bff5deabf/cd0e60e5-0e96-4e55-aa85-11739994e464/1.jpg",
-            type: "Salad",
-            description: "Cesarssss Saladsss",
-            price: 35.0
-        },
-        {
-            name: "Cesar",
-            iconUrl: "https://images.squarespace-cdn.com/content/v1/5f45e8a57835a20bff5deabf/cd0e60e5-0e96-4e55-aa85-11739994e464/1.jpg",
-            type: "Salad",
-            description: "Cesarssss Saladsss",
-            price: 35.2
-        },
-        {
-            name: "Cesar",
-            iconUrl: "https://images.squarespace-cdn.com/content/v1/5f45e8a57835a20bff5deabf/cd0e60e5-0e96-4e55-aa85-11739994e464/1.jpg",
-            type: "Salad",
-            description: "Cesarssss Saladsss",
-            price: 35.2
-        }
-    ]
+    const {loading, error, dishes, addDish} = useDishes()
 
     return (
         <div className="m-20">
@@ -142,7 +85,7 @@ export function DishesPage({setCount}: DishProps) {
             </div>
             <div className="grid grid-cols-4 gap-20">
                 {dishes.map(dish =>
-                    <Dish dish={dish} setCount={setCount}/>
+                    <Dish dish={dish} setCount={setCount} key={dish.id}/>
                 )}
             </div>
         </div>

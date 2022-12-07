@@ -1,12 +1,10 @@
 import React from 'react'
-import {saveUser} from "../model/User";
 import {useNavigate} from "react-router-dom";
 
 export function LoginPage() {
     const navigate = useNavigate();
 
     const sighIn = () => {
-        saveUser()
         navigate("/");
     }
 

@@ -1,30 +1,53 @@
-
-export interface Review {
-    username: string,
-    userIcon: string,
-    comment: string
-}
+import {IReview} from "../model/Review";
+import {IUser} from "../model/User";
+import axios from "axios";
+import {useEffect, useState} from "react";
 
 export interface ReviewProps {
-    review: Review
+    review: IReview
 }
 
+const emptyUser = {
+    id: "",
+    username: "",
+    iconUrl: ""
+}
+
+
 export function Review({review}: ReviewProps) {
+
+    const [user, setUser] = useState(emptyUser)
+
+    async function getUser() {
+        try {
+            const response = await axios.get<IUser>('http://localhost:8080/users/' + review.userId)
+            setUser(response.data)
+        } catch (e: unknown) {
+            return emptyUser
+        }
+    }
+
+    useEffect(() => {
+        getUser()
+    }, [])
+
     return (
         <div className="w-full rounded-xl p-3 border-lime-500 border">
             <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-1">
                     <div className="h-10">
-                        <img src={review.userIcon} className="rounded-full"/>
+                        <img src={user.iconUrl} className="rounded-full"/>
                     </div>
 
                 </div>
-                <div className="col-span-11 grid grid-rows-2">
-                    <div>
-                        <text className="font-bold">{review.username}</text>
+                <div className="col-span-11 grid grid-rows-8 gap-4">
+                    <div className="row-span-3">
+                        <text className="font-bold">{user.username}</text>
+                        <br/>
+                        <text className="font-light text-sm text-gray-400">{new Date(review.reviewDate).toDateString()}</text>
                     </div>
-                    <div>
-                        <text className="font-light">{review.comment}</text>
+                    <div className="row-span-5">
+                        <text className="font-light">{review.review}</text>
                     </div>
                 </div>
             </div>

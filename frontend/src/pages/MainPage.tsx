@@ -1,6 +1,5 @@
 import {Link} from "react-router-dom";
 import React from "react";
-import {isUser} from "../model/User";
 
 export function MainPage() {
     return (
@@ -21,7 +20,7 @@ export function MainPage() {
 
                     </div>
                     <div className="text-black text-2xl pt-7 px-10">
-                        <Link to={isUser() ? "/dishes" : "/login"}
+                        <Link to={"/login"}
                               className="text-white font-light text-xl bg-black border-8 border-black rounded-3xl
                 hover:text-lime-500">
                             <text className="p-4">
