@@ -1,6 +1,6 @@
 import {Dish} from "../components/Dish";
 import {Menu, Transition} from '@headlessui/react'
-import {Fragment, useState} from "react";
+import {Fragment} from "react";
 import {useDishes} from "../hooks/dishes";
 import {DishType} from "../model/DishType";
 
@@ -9,16 +9,11 @@ function classNames(...classes: any[]) {
 }
 
 interface DishProps {
-    setCount: (n: number) => void
+    setCount: () => void
 }
 
 export function DishesPage({setCount}: DishProps) {
     const {dishesType, dishes, dishesByType} = useDishes()
-
-    // const updateDishesByType = (dishType: DishType) => {
-    //     setDishesType(dishType)
-    //     dishesByType(dishType)
-    // }
 
     return (
         <div className="m-20">

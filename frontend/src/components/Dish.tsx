@@ -2,13 +2,10 @@ import {IDish} from "../model/Dish";
 
 export interface DishProps {
     dish: IDish
-    setCount: (n: number) => void
+    setCount: () => void
 }
 
 export function Dish({dish, setCount}: DishProps) {
-    const set = () => {
-        setCount(1)
-    }
 
     return (
         <div className="grid grid-rows-5 h-[300px] border-lime-500">
@@ -30,7 +27,7 @@ export function Dish({dish, setCount}: DishProps) {
                     </span>
                     <span>
                         <button className="bg-lime-400 hover:bg-gray-200 h-8 w-8 rounded-md"
-                                onClick={set}>
+                                onClick={setCount}>
                             <img src="bag.svg" className="fill-white p-2 object-cover"/>
                         </button>
                     </span>

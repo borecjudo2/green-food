@@ -3,13 +3,19 @@ import {OrderDish} from "../model/OrderDish";
 
 export interface OrderProps {
     order: OrderDish,
-    onDelete: (dishId: string) => void
+    onDelete: (dishId: string) => void,
+    removeOrdersCount: () => void
 }
 
-export function Order({order, onDelete}: OrderProps) {
+interface DishProps {
+    removeOrdersCount: () => void
+}
+
+export function Order({order, onDelete, removeOrdersCount}: OrderProps) {
 
     const removeDishFromOrder = () => {
         onDelete(order.dish.id)
+        removeOrdersCount()
     }
 
     return (

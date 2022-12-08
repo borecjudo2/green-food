@@ -5,12 +5,7 @@ import {DishType} from "../model/DishType";
 
 export function useDishes() {
     const [dishes, setDishes] = useState<IDish[]>([])
-    const  [dishesType, setDishesType] = useState(DishType.ALL)
-
-
-    function addDish(dish: IDish) {
-        setDishes(prev => [...prev, dish])
-    }
+    const [dishesType, setDishesType] = useState(DishType.ALL)
 
     const dishesByType = (dishType: DishType) => {
         if (dishType === DishType.ALL) {
