@@ -4,30 +4,18 @@ import {IReview} from "../model/Review";
 
 export function useReviews() {
     const [reviews, setReviews] = useState<IReview[]>([])
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState('')
 
-    function addReview(review: IReview) {
-        setReviews(prev => [...prev, review])
+    const getReviews = () => {
+      fetchReviews()
     }
-
     async function fetchReviews() {
-        try {
-            setError('')
-            setLoading(true)
-            const response = await axios.get<IReview[]>('http://localhost:8080/reviews')
-            setReviews(response.data)
-            setLoading(false)
-        } catch (e: unknown) {
-            const error = e as AxiosError
-            setLoading(false)
-            setError(error.message)
-        }
+        const response = await axios.get<IReview[]>('http://localhost:8080/reviews')
+        setReviews(response.data)
     }
 
     useEffect(() => {
         fetchReviews()
     }, [])
 
-    return {loading, error, reviews, setReviews}
+    return {reviews, getReviews}
 }

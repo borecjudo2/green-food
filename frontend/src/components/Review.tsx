@@ -1,10 +1,11 @@
 import {IReview} from "../model/Review";
 import {IUser} from "../model/User";
 import axios from "axios";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 
 export interface ReviewProps {
     review: IReview
+    deleteReview: (reviewId: string) => void
 }
 
 const emptyUser = {
@@ -14,7 +15,8 @@ const emptyUser = {
 }
 
 
-export function Review({review}: ReviewProps) {
+export function Review({review, deleteReview}: ReviewProps) {
+    const userId: string = localStorage.getItem('userId') as string;
 
     const [user, setUser] = useState(emptyUser)
 
@@ -44,11 +46,23 @@ export function Review({review}: ReviewProps) {
                     <div className="row-span-3">
                         <text className="font-bold">{user.username}</text>
                         <br/>
-                        <text className="font-light text-sm text-gray-400">{new Date(review.reviewDate).toDateString()}</text>
+                        <text
+                            className="font-light text-sm text-gray-400">{new Date(review.reviewDate).toDateString()}</text>
                     </div>
                     <div className="row-span-5">
                         <text className="font-light">{review.review}</text>
                     </div>
+                    {userId === review.userId ?
+                        <div className="place-self-end">
+                            <button className="bg-red-200 hover:bg-red-400 p-2 rounded-xl"
+                                    onClick={() => deleteReview(review.id)}>
+                                <img src="delete.png"/>
+                            </button>
+                        </div>
+                        :
+                        <></>
+                    }
+
                 </div>
             </div>
         </div>
