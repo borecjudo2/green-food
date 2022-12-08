@@ -16,6 +16,10 @@ export function useDishes() {
         setDishesType(dishType)
     }
 
+    const addDish = (dish: IDish) => {
+        setDishes(prevState => [...prevState, dish])
+    }
+
     async function getDishes() {
         const response = await axios.get<IDish[]>('http://localhost:8080/dishes')
         setDishes(response.data)
@@ -34,5 +38,5 @@ export function useDishes() {
         getDishes()
     }, [])
 
-    return {dishesType, dishes, dishesByType}
+    return {dishesType, dishes, dishesByType, addDish}
 }

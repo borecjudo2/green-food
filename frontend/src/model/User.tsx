@@ -3,3 +3,9 @@ export interface IUser {
     username: string,
     iconUrl: string
 }
+
+export const emptyUser: IUser = {
+    id: "",
+    username: "",
+    iconUrl: ""
+}

@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link, useLocation} from 'react-router-dom'
+import {Disclosure} from "@headlessui/react";
 
 interface NavigationProps {
     count: number
@@ -10,7 +11,7 @@ export function Navigation({count}: NavigationProps) {
 
     if (location.pathname !== "/login") {
         return (
-            <nav className="h-[120px] flex justify-between px-20 bg-white items-center text-white">
+            <header className="bg-opacity-90 sticky top-0 h-[120px] flex justify-between px-20 bg-white items-center text-white">
                 <div className="font-bold">
                     <Link to="/">
                         <img src="nori.png" alt="sad" className="inline pb-3 pr-4"/>
@@ -36,9 +37,11 @@ export function Navigation({count}: NavigationProps) {
                             <img src="shopping-bag.png" alt="sad" className="object-cover inline pb-2 pr-2 "/>
                             <text className="inline">Order {count === 0 ?
                                 "" :
-                                <text className="rounded-full text-red-600">
-                                    {count}
-                                </text>
+                                <>
+                                    <text className="rounded-full text-red-600">
+                                        {count}
+                                    </text>
+                                </>
                             }</text>
                         </Link>
                     </div>
@@ -51,7 +54,7 @@ export function Navigation({count}: NavigationProps) {
                         </Link>
                     </div>
                 </div>
-            </nav>
+            </header>
         )
     }
 

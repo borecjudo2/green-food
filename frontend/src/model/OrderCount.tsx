@@ -7,7 +7,6 @@ export function addToOrderCount() {
 
 export function getOrderCount():number {
     const item = localStorage.getItem("order_count") as string;
-    console.log(item)
     return item !== null ? JSON.parse(item) as number : 0;
 }
 
