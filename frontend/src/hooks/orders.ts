@@ -7,11 +7,12 @@ import {OrderDish} from "../model/OrderDish";
 export function useOrders() {
     const [orders, setOrders] = useState<OrderDish[]>([])
 
+    const clearOrders = () => {
+        setOrders([])
+    }
+
     const removeFromOrder = (dishId: string) => {
         deleteDishFromOrder(dishId)
-        // updateOrderCount()
-        // getOrders()
-        // console.log("I'm gere +1")
 
         const newOrders = orders.filter(order => {
             if (order.dish.id === dishId) {
@@ -26,10 +27,6 @@ export function useOrders() {
         });
 
         setOrders(newOrders)
-
-
-        // orders.
-        // setOrders(prev => prev.remo)
     }
 
     const userId = localStorage.getItem('userId');
@@ -41,7 +38,6 @@ export function useOrders() {
                     getDish(order.dishId)
                         .then(function (response) {
                                 const dish: IDish = response.data;
-                                console.log(dish)
                                 const dishOrder: OrderDish = {
                                     count: order.count,
                                     dish: dish
@@ -66,24 +62,11 @@ export function useOrders() {
         return orders
             .map(order => order.count * order.dish.price)
             .reduce((accumulator, currentValue) => accumulator + currentValue, 10);
-
-
-        // try {
-        //     const userId = localStorage.getItem('userId');
-        //     axios.get<number>('http://localhost:8080/users/' + userId + '/dishes/sum')
-        //         .then(function (response) {
-        //             setDishesSum(response.data)
-        //             return response.data;
-        //         })
-        //     return 0.0
-        // } catch (e: unknown) {
-        //     return 0.0
-        // }
     }
 
     useEffect(() => {
         getOrders()
     }, [])
 
-    return {orders, getOrders, getDishSum, removeFromOrder}
+    return {orders, getOrders, getDishSum, removeFromOrder, clearOrders}
 }

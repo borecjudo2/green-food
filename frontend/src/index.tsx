@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import {LoginState} from "./context/LoginContext";
+import {ModelState} from "./context/ModelContext";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -12,7 +13,9 @@ const root = ReactDOM.createRoot(
 root.render(
     <BrowserRouter>
         <LoginState>
-            <App/>
+            <ModelState>
+                <App/>
+            </ModelState>
         </LoginState>
     </BrowserRouter>
 );
