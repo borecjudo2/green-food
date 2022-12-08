@@ -1,5 +1,5 @@
 import React from "react";
-import {OrderDish} from "../pages/OrderPage";
+import {OrderDish} from "../model/OrderDish";
 
 export interface OrderProps {
     order: OrderDish,

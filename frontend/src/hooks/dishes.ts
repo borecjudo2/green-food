@@ -1,33 +1,43 @@
 import {useEffect, useState} from 'react'
-import axios, {AxiosError} from 'axios'
+import axios from 'axios'
 import {IDish} from "../model/Dish";
+import {DishType} from "../model/DishType";
 
 export function useDishes() {
     const [dishes, setDishes] = useState<IDish[]>([])
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState('')
+    const  [dishesType, setDishesType] = useState(DishType.ALL)
+
 
     function addDish(dish: IDish) {
         setDishes(prev => [...prev, dish])
     }
 
-    async function fetchDishes() {
-        try {
-            setError('')
-            setLoading(true)
-            const response = await axios.get<IDish[]>('http://localhost:8080/dishes')
-            setDishes(response.data)
-            setLoading(false)
-        } catch (e: unknown) {
-            const error = e as AxiosError
-            setLoading(false)
-            setError(error.message)
+    const dishesByType = (dishType: DishType) => {
+        if (dishType === DishType.ALL) {
+            getDishes()
+        } else {
+            getDishesByType(dishType)
         }
+        setDishesType(dishType)
+    }
+
+    async function getDishes() {
+        const response = await axios.get<IDish[]>('http://localhost:8080/dishes')
+        setDishes(response.data)
+    }
+
+    async function getDishesByType(dishType: string) {
+        const response = await axios.get<IDish[]>('http://localhost:8080/dishes', {
+            params: {
+                dishType: dishType
+            }
+        })
+        setDishes(response.data)
     }
 
     useEffect(() => {
-        fetchDishes()
+        getDishes()
     }, [])
 
-    return { loading, error, dishes, addDish }
+    return {dishesType, dishes, dishesByType}
 }

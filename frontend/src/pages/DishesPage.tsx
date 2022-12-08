@@ -1,7 +1,8 @@
 import {Dish} from "../components/Dish";
 import {Menu, Transition} from '@headlessui/react'
-import {Fragment} from "react";
+import {Fragment, useState} from "react";
 import {useDishes} from "../hooks/dishes";
+import {DishType} from "../model/DishType";
 
 function classNames(...classes: any[]) {
     return classes.filter(Boolean).join(' ')
@@ -12,14 +13,19 @@ interface DishProps {
 }
 
 export function DishesPage({setCount}: DishProps) {
-    const {loading, error, dishes, addDish} = useDishes()
+    const {dishesType, dishes, dishesByType} = useDishes()
+
+    // const updateDishesByType = (dishType: DishType) => {
+    //     setDishesType(dishType)
+    //     dishesByType(dishType)
+    // }
 
     return (
         <div className="m-20">
             <div className="grid place-content-end mb-10">
                 <div className="grid grid-cols-2">
                     <div>
-                        <text>All dishes</text>
+                        <text>{dishesType}</text>
                     </div>
                     <div
                         className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
@@ -50,30 +56,50 @@ export function DishesPage({setCount}: DishProps) {
                                     <Menu.Item>
                                         {({active}) => (
                                             <a
-                                                href="#"
+                                                onClick={() => dishesByType(DishType.ALL)}
                                                 className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                             >
-                                                Your Profile
+                                                {DishType.ALL}
                                             </a>
                                         )}
                                     </Menu.Item>
                                     <Menu.Item>
                                         {({active}) => (
                                             <a
-                                                href="#"
+                                                onClick={() => dishesByType(DishType.PLATTERS)}
                                                 className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                             >
-                                                Settings
+                                                {DishType.PLATTERS}
                                             </a>
                                         )}
                                     </Menu.Item>
                                     <Menu.Item>
                                         {({active}) => (
                                             <a
-                                                href="#"
+                                                onClick={() => dishesByType(DishType.SUSHI)}
                                                 className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                             >
-                                                Sign out
+                                                {DishType.SUSHI}
+                                            </a>
+                                        )}
+                                    </Menu.Item>
+                                    <Menu.Item>
+                                        {({active}) => (
+                                            <a
+                                                onClick={() => dishesByType(DishType.ROLLS)}
+                                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                            >
+                                                {DishType.ROLLS}
+                                            </a>
+                                        )}
+                                    </Menu.Item>
+                                    <Menu.Item>
+                                        {({active}) => (
+                                            <a
+                                                onClick={() => dishesByType(DishType.SOUP)}
+                                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                            >
+                                                {DishType.SOUP}
                                             </a>
                                         )}
                                     </Menu.Item>
