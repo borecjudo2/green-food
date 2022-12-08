@@ -1,4 +1,6 @@
 import {IDish} from "../model/Dish";
+import {IOrder} from "../model/Order";
+import axios from "axios";
 
 export interface DishProps {
     dish: IDish
@@ -6,6 +8,17 @@ export interface DishProps {
 }
 
 export function Dish({dish, setCount}: DishProps) {
+
+    const addDishToOrder = () => {
+        addDishToOrderRequest().then(function () {
+            setCount()
+        })
+    }
+
+    async function addDishToOrderRequest() {
+        const userId = localStorage.getItem('userId');
+        await axios.post<IOrder>('http://localhost:8080/users/' + userId + '/dishes/' + dish.id)
+    }
 
     return (
         <div className="grid grid-rows-5 h-[300px] border-lime-500">
@@ -27,7 +40,7 @@ export function Dish({dish, setCount}: DishProps) {
                     </span>
                     <span>
                         <button className="bg-lime-400 hover:bg-gray-200 h-8 w-8 rounded-md"
-                                onClick={setCount}>
+                                onClick={addDishToOrder}>
                             <img src="bag.svg" className="fill-white p-2 object-cover"/>
                         </button>
                     </span>
