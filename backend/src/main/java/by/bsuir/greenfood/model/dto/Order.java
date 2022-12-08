@@ -1,10 +1,10 @@
 package by.bsuir.greenfood.model.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;
-import jakarta.validation.constraints.NotNull;
 
 /**
  * DESCRIPTION
@@ -22,7 +22,6 @@ public class Order {
 
   private String data;
 
-  @NotNull
   private Double price;
 
   @NotNull

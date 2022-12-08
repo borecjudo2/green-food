@@ -19,9 +19,7 @@ public interface DishService {
 
   Dish updateDish(Dish dish);
 
-  List<Dish> getDishes();
-
-  List<Dish> getDishesByDishType(DishType dishType);
+  List<Dish> getDishes(DishType dishType);
 
   Optional<Dish> getDishByName(String name);
 

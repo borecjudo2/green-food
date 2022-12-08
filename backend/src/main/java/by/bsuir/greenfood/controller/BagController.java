@@ -37,6 +37,18 @@ public class BagController {
     service.createBag(userId, dishId);
   }
 
+  @GetMapping(value = "/count", produces = MediaType.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  public int countBags(@PathVariable UUID userId) {
+    return service.countBags(userId);
+  }
+
+  @GetMapping(value = "/sum", produces = MediaType.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  public Double sumBags(@PathVariable UUID userId) {
+    return service.sumBags(userId);
+  }
+
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.OK)
   public List<Bag> findAllByUserId(@PathVariable UUID userId) {

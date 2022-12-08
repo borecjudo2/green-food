@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.OffsetDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,6 +31,9 @@ public class ReviewServiceImpl implements ReviewService {
   @Override
   public Review createReview(Review review) {
     ReviewEntity reviewForCreate = mapper.dtoToEntity(review);
+
+    reviewForCreate.setReviewDate(OffsetDateTime.now());
+
     return mapper.entityToDto(reviewRepository.save(reviewForCreate));
   }
 
@@ -53,7 +58,10 @@ public class ReviewServiceImpl implements ReviewService {
 
   @Override
   public List<Review> getReviews() {
-    return reviewRepository.findAll().stream().map(mapper::entityToDto).toList();
+    return reviewRepository.findAll().stream()
+        .sorted(Comparator.comparing(ReviewEntity::getReviewDate).reversed())
+        .map(mapper::entityToDto)
+        .toList();
   }
 
   @Override

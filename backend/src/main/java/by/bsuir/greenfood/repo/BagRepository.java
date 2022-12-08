@@ -2,6 +2,8 @@ package by.bsuir.greenfood.repo;
 
 import by.bsuir.greenfood.model.entity.BagEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,5 +23,7 @@ public interface BagRepository extends JpaRepository<BagEntity, UUID> {
 
   void deleteAllByUserId(UUID userId);
 
+  @Modifying
+  @Query("delete from BagEntity bag where bag.userId=:userId and bag.dishId=:dishId")
   void deleteByUserIdAndDishId(UUID userId, UUID dishId);
 }

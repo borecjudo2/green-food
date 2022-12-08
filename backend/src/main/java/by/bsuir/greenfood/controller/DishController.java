@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -49,14 +50,8 @@ public class DishController {
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.OK)
-  public List<Dish> getDishes() {
-    return dishService.getDishes();
-  }
-
-  @GetMapping(value = "/{dishType}", produces = MediaType.APPLICATION_JSON_VALUE)
-  @ResponseStatus(HttpStatus.OK)
-  public List<Dish> getDishesByDishType(@PathVariable DishType dishType) {
-    return dishService.getDishesByDishType(dishType);
+  public List<Dish> getDishes(@RequestParam(required = false) DishType dishType) {
+    return dishService.getDishes(dishType);
   }
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

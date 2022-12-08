@@ -1,14 +1,20 @@
 package by.bsuir.greenfood.service.impl;
 
 import by.bsuir.greenfood.mapper.OrderMapper;
+import by.bsuir.greenfood.model.dto.Bag;
 import by.bsuir.greenfood.model.dto.Order;
 import by.bsuir.greenfood.model.entity.OrderEntity;
 import by.bsuir.greenfood.repo.OrderRepository;
+import by.bsuir.greenfood.service.BagService;
 import by.bsuir.greenfood.service.OrderService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,14 +28,29 @@ import java.util.UUID;
 @AllArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
+  private static final ObjectMapper MAPPER = new ObjectMapper();
+
   private final OrderMapper mapper;
 
   private final OrderRepository orderRepository;
+  private final BagService bagService;
 
   @Override
+  @Transactional
+  @SneakyThrows
   public Order createOrder(Order order) {
     OrderEntity orderForCreate = mapper.dtoToEntity(order);
-    return mapper.entityToDto(orderRepository.save(orderForCreate));
+    List<Bag> bagList = bagService.findAllByUserId(order.getUserId());
+
+    orderForCreate.setData(MAPPER.writeValueAsString(bagList));
+    orderForCreate.setOrderDate(OffsetDateTime.now());
+    orderForCreate.setPrice(bagService.sumBags(order.getUserId()));
+
+    Order createdOrder = mapper.entityToDto(orderRepository.save(orderForCreate));
+
+    bagService.deleteAllBagsByUserId(order.getUserId());
+
+    return createdOrder;
   }
 
   @Override

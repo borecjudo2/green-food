@@ -6,6 +6,7 @@ import by.bsuir.greenfood.model.entity.DishEntity;
 import by.bsuir.greenfood.model.enums.DishType;
 import by.bsuir.greenfood.repo.DishRepository;
 import by.bsuir.greenfood.service.DishService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import jakarta.persistence.EntityNotFoundException;
 
 /**
  * DESCRIPTION
@@ -49,14 +49,13 @@ public class DishServiceImpl implements DishService {
   }
 
   @Override
-  public List<Dish> getDishes() {
-    return dishRepository.findAll().stream()
-        .map(mapper::entityToDto)
-        .toList();
-  }
+  public List<Dish> getDishes(DishType dishType) {
+    if (dishType == null) {
+      return dishRepository.findAll().stream()
+          .map(mapper::entityToDto)
+          .toList();
+    }
 
-  @Override
-  public List<Dish> getDishesByDishType(DishType dishType) {
     return dishRepository.findAllByDishType(dishType).stream()
         .map(mapper::entityToDto)
         .toList();
