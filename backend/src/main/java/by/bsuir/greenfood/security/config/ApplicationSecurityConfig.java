@@ -76,6 +76,8 @@ public class ApplicationSecurityConfig {
                 .permitAll()
                 .requestMatchers(HttpMethod.OPTIONS, "/**")
                 .permitAll()
+                .requestMatchers(HttpMethod.POST, "/login")
+                .permitAll()
                 .requestMatchers(HttpMethod.POST, "/dishes").hasRole("ADMIN")
                 .anyRequest().hasAnyRole("ADMIN", "USER")
         )

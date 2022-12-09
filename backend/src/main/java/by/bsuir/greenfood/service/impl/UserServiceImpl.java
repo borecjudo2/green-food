@@ -57,6 +57,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
   }
 
   @Override
+  @Transactional
   public User getUserByUsername(String username) {
     return repository.findByUsername(username).map(mapper::entityToDto)
         .orElseThrow(() -> new UsernameNotFoundException("User not found with username " + username));
