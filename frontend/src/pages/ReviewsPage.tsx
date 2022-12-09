@@ -4,7 +4,11 @@ import React, {useState} from "react";
 import axios from "axios";
 import {IReview} from "../model/Review";
 
-export function ReviewsPage() {
+interface ReviewsPageProps {
+    isLogin: boolean
+}
+
+export function ReviewsPage({isLogin}: ReviewsPageProps) {
     const {reviews, getReviews} = useReviews()
 
     const [isReadyForOrder, setIsReadyForOrder] = useState(false)
@@ -46,11 +50,11 @@ export function ReviewsPage() {
     async function applyReviewRequest(dtoForCreate: IReview) {
         await axios.post<IReview>('http://localhost:8080/reviews', dtoForCreate
             , {
-            auth: {
-                username: 'user',
-                password: 'user'
+                auth: {
+                    username: 'user',
+                    password: 'user'
+                }
             }
-        }
         );
     }
 
@@ -90,11 +94,15 @@ export function ReviewsPage() {
                     <div className="flex justify-between">
                         <text className="font-bold text-5xl">Reviews</text>
 
-                        <button onClick={() => setIsShowAddReviewView(true)}
-                                className="rounded-xl border p-2 text-white mt-3
+                        {isLogin ? <button onClick={() => setIsShowAddReviewView(true)}
+                                           className="rounded-xl border p-2 text-white mt-3
                             bg-gradient-to-r from-lime-200 to-blue-500 hover:from-pink-500 hover:to-yellow-500">
-                            Add my review
-                        </button>
+                                Add my review
+                            </button>
+                            :
+                            <div/>
+                        }
+
                     </div>
 
                     <div className="pt-4 grid grid-cols-2 gap-5">

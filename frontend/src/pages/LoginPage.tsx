@@ -3,7 +3,6 @@ import {useNavigate} from "react-router-dom";
 import axios, {AxiosResponse} from 'axios'
 import {IUser} from "../model/User";
 import {UserCredentials} from "../model/UserCredentials";
-import {getUsername, getUserPassword} from "../hooks/userCredentialUtils";
 
 interface LoginPageProps {
     saveUserToLocalStore: (user: IUser, credentials: UserCredentials) => void
@@ -13,6 +12,9 @@ export function LoginPage({saveUserToLocalStore}: LoginPageProps) {
     const navigate = useNavigate();
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+
+    const [show, setShow] = useState(false);
+    const [showMessage, setShowMessage] = useState("");
 
     const userCredentials: UserCredentials = {
         username: username,
@@ -41,16 +43,26 @@ export function LoginPage({saveUserToLocalStore}: LoginPageProps) {
             .then((response) => {
                 saveUserToLocalStore(response.data, userCredentials)
                 navigate("/");
-            })
-            .catch((exc) => {
-                console.log(exc)
-            })
+            }).catch(() =>  {
+            setShow(true)
+            setTimeout(function () {
+                setShow(false)
+            }, 3000);
+        })
     }
 
     return (
         <div className="grid grid-cols-2 w-full h-screen">
             <div className="place-self-center">
                 <div className="bg-white place-self-stretch w-full h-[350px] grid grid-cols-1">
+                    {show ?
+                        <div className="grid place-items-center border border-red-500 rounded-xl text-red-500 animate-pulse">
+                            <text className="font-bold text-2xl">Username or Password</text>
+                            <text className="font-bold text-2xl">Not correct!</text>
+                        </div>
+                        :
+                        <></>
+                    }
                     <div>
                         <text className="font-bold text-4xl">Welcome back</text>
                         <br/>

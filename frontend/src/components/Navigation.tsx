@@ -55,7 +55,8 @@ export function Navigation({count, updateOrderCount, isLogin, removeUserToLocalS
                             <div>
                                 <Link to="/"
                                       onClick={removeUserToLocalStore}
-                                      className="text-white font-light text-xl bg-black border-8 border-black rounded-3xl hover:text-lime-500">
+                                      className="text-white font-light text-xl border p-2  rounded-3xl
+                                       border-red-500 text-red-500 hover:bg-red-500 hover:text-white">
                                     <text className="p-4">
                                         Log out
                                     </text>

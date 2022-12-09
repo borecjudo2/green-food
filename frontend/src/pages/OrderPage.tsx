@@ -10,11 +10,12 @@ import {emptyUser, IUser} from "../model/User";
 
 
 interface DishProps {
+    isLogin: boolean
     removeOrdersCount: () => void
     clearOrdersCount: () => void
 }
 
-export function OrderPage({removeOrdersCount, clearOrdersCount}: DishProps) {
+export function OrderPage({isLogin, removeOrdersCount, clearOrdersCount}: DishProps) {
     const navigate = useNavigate();
     const userId: string = localStorage.getItem('userId') as string;
     const [user, setUser] = useState(emptyUser)
@@ -203,7 +204,8 @@ export function OrderPage({removeOrdersCount, clearOrdersCount}: DishProps) {
                                         <Order order={order}
                                                key={order.dish.id}
                                                removeOrdersCount={removeOrdersCount}
-                                               onDelete={removeFromOrder}/>)}
+                                               onDelete={removeFromOrder}
+                                               isLogin={isLogin}/>)}
                                 </div>
                                 <div className="border-b py-3">
                                     <div className="flex justify-between mb-3">

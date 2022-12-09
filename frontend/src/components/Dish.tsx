@@ -3,11 +3,12 @@ import {IOrder} from "../model/Order";
 import axios from "axios";
 
 export interface DishProps {
+    isLogin: boolean
     dish: IDish
     setCount: () => void
 }
 
-export function Dish({dish, setCount}: DishProps) {
+export function Dish({isLogin, dish, setCount}: DishProps) {
 
     const addDishToOrder = () => {
         addDishToOrderRequest().then(function () {
@@ -39,10 +40,14 @@ export function Dish({dish, setCount}: DishProps) {
                         <text className="font-light">Dish type: {dish.dishType}</text>
                     </span>
                     <span>
-                        <button className="bg-lime-400 hover:bg-gray-200 h-8 w-8 rounded-md"
-                                onClick={addDishToOrder}>
-                            <img src="bag.svg" className="fill-white p-2 object-cover"/>
-                        </button>
+                        {isLogin ?
+                            <button className="bg-lime-400 hover:bg-gray-200 h-8 w-8 rounded-md"
+                                    onClick={addDishToOrder}>
+                                <img src="bag.svg" className="fill-white p-2 object-cover"/>
+                            </button>
+                            :
+                            <div/>
+                        }
                     </span>
                 </div>
             </div>

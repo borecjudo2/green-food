@@ -23,7 +23,7 @@ export function DishesPage({setCount, isLogin}: DishProps) {
 
     const [isReadyForOrder, setIsReadyForOrder] = useState(false)
     const [isShowCreateDishView, setIsShowCreateDishView] = useState(false)
-    const [isAdmin, setIsAdmin] =useState(false)
+    const [isAdmin, setIsAdmin] = useState(false)
 
     const [name, setName] = useState('')
     const [dishType, setDishType] = useState(DishType.SUSHI)
@@ -79,7 +79,7 @@ export function DishesPage({setCount, isLogin}: DishProps) {
         await axios.post<IDish>('http://localhost:8080/dishes', dtoForCreate);
     }
 
-    useEffect(() => setIsAdmin(isUserAdmin()),[isLogin])
+    useEffect(() => setIsAdmin(isUserAdmin()), [isLogin])
 
     return (
         <div className="m-20">
@@ -199,8 +199,8 @@ export function DishesPage({setCount, isLogin}: DishProps) {
                             bg-gradient-to-r from-lime-200 to-blue-500 hover:from-pink-500 hover:to-yellow-500">
                                     Add new dish
                                 </button>
-                            :
-                            <></>}
+                                :
+                                <></>}
                         </div>
                         <div className="grid grid-cols-2 place-self-end">
                             <div>
@@ -290,7 +290,7 @@ export function DishesPage({setCount, isLogin}: DishProps) {
                     </div>
                     <div className="grid grid-cols-4 gap-20">
                         {dishes.map(dish =>
-                            <Dish dish={dish} setCount={setCount} key={dish.id}/>
+                            <Dish dish={dish} setCount={setCount} key={dish.id} isLogin={isLogin}/>
                         )}
                     </div>
                 </>

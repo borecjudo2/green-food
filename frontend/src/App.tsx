@@ -23,9 +23,9 @@ function App() {
             <Routes>
                 <Route path="/" element={<MainPage isLogin={isLogin}/>}/>
                 <Route path="/dishes" element={<DishesPage setCount={addOrdersCount} isLogin={isLogin}/>}/>
-                <Route path="/reviews" element={<ReviewsPage/>}/>
+                <Route path="/reviews" element={<ReviewsPage isLogin={isLogin}/>}/>
                 <Route path="/orders" element={
-                    <OrderPage removeOrdersCount={removeOrdersCount} clearOrdersCount={clearOrderCount}/>}/>
+                    <OrderPage removeOrdersCount={removeOrdersCount} clearOrdersCount={clearOrderCount} isLogin={isLogin}/>}/>
                 <Route path="/login" element={<LoginPage saveUserToLocalStore={saveUserToLocalStore}/>}/>
             </Routes>
         </>
