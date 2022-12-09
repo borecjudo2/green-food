@@ -1,7 +1,10 @@
 import {Link} from "react-router-dom";
 import React from "react";
 
-export function MainPage() {
+interface MainPageProps {
+    isLogin: boolean
+}
+export function MainPage({isLogin}: MainPageProps) {
     return (
         <>
             <div className="bg-lime-300 h-[28rem] mx-20 mt-10 rounded-3xl grid grid-cols-2">
@@ -20,7 +23,7 @@ export function MainPage() {
 
                     </div>
                     <div className="text-black text-2xl pt-7 px-10">
-                        <Link to={"/login"}
+                        <Link to={isLogin ? "/dishes" : "/login"}
                               className="text-white font-light text-xl bg-black border-8 border-black rounded-3xl
                 hover:text-lime-500">
                             <text className="p-4">

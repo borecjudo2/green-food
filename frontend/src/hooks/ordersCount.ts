@@ -16,15 +16,21 @@ export function useOrdersCount() {
         setOrdersCount(0)
     }
 
+    const updateOrderCount = () => {
+        getOrdersCount()
+    }
+
     async function getOrdersCount() {
         const userId = localStorage.getItem('userId');
-        const response = await axios.get<number>('http://localhost:8080/users/' + userId + '/dishes/count')
-        setOrdersCount(response.data)
+        if (userId !== null) {
+            const response = await axios.get<number>('http://localhost:8080/users/' + userId + '/dishes/count')
+            setOrdersCount(response.data)
+        }
     }
 
     useEffect(() => {
         getOrdersCount()
     }, [])
 
-    return {ordersCount, addOrdersCount, removeOrdersCount, clearOrderCount}
+    return {ordersCount, addOrdersCount, removeOrdersCount, clearOrderCount, updateOrderCount}
 }

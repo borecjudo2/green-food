@@ -1,25 +1,29 @@
 import {Dish} from "../components/Dish";
 import {Listbox, Menu, Transition} from '@headlessui/react'
-import React, {Fragment, useState} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import {useDishes} from "../hooks/dishes";
 import {DishType} from "../model/DishType";
 import {IDish} from "../model/Dish";
 import axios from "axios";
 import {CheckIcon, ChevronUpDownIcon} from '@heroicons/react/20/solid'
+import {isUserAdmin} from "../hooks/userCredentialUtils";
 
 function classNames(...classes: any[]) {
     return classes.filter(Boolean).join(' ')
 }
 
 interface DishProps {
+
+    isLogin: boolean
     setCount: () => void
 }
 
-export function DishesPage({setCount}: DishProps) {
+export function DishesPage({setCount, isLogin}: DishProps) {
     const {dishesType, dishes, dishesByType, addDish} = useDishes()
 
     const [isReadyForOrder, setIsReadyForOrder] = useState(false)
     const [isShowCreateDishView, setIsShowCreateDishView] = useState(false)
+    const [isAdmin, setIsAdmin] =useState(false)
 
     const [name, setName] = useState('')
     const [dishType, setDishType] = useState(DishType.SUSHI)
@@ -74,6 +78,8 @@ export function DishesPage({setCount}: DishProps) {
     async function applyDishRequest(dtoForCreate: IDish) {
         await axios.post<IDish>('http://localhost:8080/dishes', dtoForCreate);
     }
+
+    useEffect(() => setIsAdmin(isUserAdmin()),[isLogin])
 
     return (
         <div className="m-20">
@@ -187,11 +193,14 @@ export function DishesPage({setCount}: DishProps) {
                 <>
                     <div className="grid grid-cols-2 flex justify-between mb-10">
                         <div>
-                            <button onClick={() => showCreateDishView(true)}
-                                    className="rounded-xl border p-2 text-white
+                            {isAdmin ?
+                                <button onClick={() => showCreateDishView(true)}
+                                        className="rounded-xl border p-2 text-white
                             bg-gradient-to-r from-lime-200 to-blue-500 hover:from-pink-500 hover:to-yellow-500">
-                                Add new dish
-                            </button>
+                                    Add new dish
+                                </button>
+                            :
+                            <></>}
                         </div>
                         <div className="grid grid-cols-2 place-self-end">
                             <div>

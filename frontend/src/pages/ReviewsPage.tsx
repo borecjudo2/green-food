@@ -1,7 +1,6 @@
 import {Review} from "../components/Review";
 import {useReviews} from "../hooks/reviews";
 import React, {useState} from "react";
-import {IDish} from "../model/Dish";
 import axios from "axios";
 import {IReview} from "../model/Review";
 
@@ -45,7 +44,14 @@ export function ReviewsPage() {
     }
 
     async function applyReviewRequest(dtoForCreate: IReview) {
-        await axios.post<IDish>('http://localhost:8080/reviews', dtoForCreate);
+        await axios.post<IReview>('http://localhost:8080/reviews', dtoForCreate
+            , {
+            auth: {
+                username: 'user',
+                password: 'user'
+            }
+        }
+        );
     }
 
     const deleteReview = (reviewId: string) => {

@@ -1,11 +1,50 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {useNavigate} from "react-router-dom";
+import axios, {AxiosResponse} from 'axios'
+import {IUser} from "../model/User";
+import {UserCredentials} from "../model/UserCredentials";
+import {getUsername, getUserPassword} from "../hooks/userCredentialUtils";
 
-export function LoginPage() {
+interface LoginPageProps {
+    saveUserToLocalStore: (user: IUser, credentials: UserCredentials) => void
+}
+
+export function LoginPage({saveUserToLocalStore}: LoginPageProps) {
     const navigate = useNavigate();
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+
+    const userCredentials: UserCredentials = {
+        username: username,
+        password: password
+    }
+
+    const setUsernameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setUsername(event.target.value)
+    }
+
+    const setPasswordHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setPassword(event.target.value)
+    }
+
+    async function applyLoginRequest(): Promise<AxiosResponse<IUser>> {
+        axios.defaults.auth = {
+            username: username,
+            password: password
+        }
+        return await axios.post<IUser>('http://localhost:8080/login', userCredentials);
+    }
+
 
     const sighIn = () => {
-        navigate("/");
+        applyLoginRequest()
+            .then((response) => {
+                saveUserToLocalStore(response.data, userCredentials)
+                navigate("/");
+            })
+            .catch((exc) => {
+                console.log(exc)
+            })
     }
 
     return (
@@ -19,15 +58,19 @@ export function LoginPage() {
                         <text className="text-gray-400">Welcome back! Please enter your details.</text>
                     </div>
                     <div className="">
-                        <text>Email</text>
+                        <text>Username</text>
                         <br/>
-                        <input placeholder="Enter your email"
+                        <input value={username}
+                               onChange={setUsernameHandler}
+                               placeholder="Enter your Username"
                                className="w-full h-10 border-gray-300 border-2 rounded-md px-3"/>
                         <br/>
                         <br/>
                         <text>Password</text>
                         <br/>
-                        <input placeholder="Enter your password"
+                        <input value={password}
+                               onChange={setPasswordHandler}
+                               placeholder="Enter your password"
                                type="password"
                                className="w-full h-10 border-gray-300 border-2 rounded-md px-3"/>
                     </div>
