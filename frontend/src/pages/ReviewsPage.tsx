@@ -3,6 +3,8 @@ import {useReviews} from "../hooks/reviews";
 import React, {useState} from "react";
 import axios from "axios";
 import {IReview} from "../model/Review";
+import {LineChartOrders} from "../components/LineChartOrders";
+import {LineChartOrdersPrice} from "../components/LineChartOrdersPrice";
 
 interface ReviewsPageProps {
     isLogin: boolean
@@ -112,9 +114,12 @@ export function ReviewsPage({isLogin}: ReviewsPageProps) {
                     <div className="pt-20">
                         <text className="font-bold text-5xl">Analytics</text>
                         <div className="pt-4 grid grid-cols-2 gap-5">
-
-                            {reviews.map(review => <Review review={review} key={review.id}
-                                                           deleteReview={deleteReview}/>)}
+                            <div>
+                                <LineChartOrders/>
+                            </div>
+                            <div>
+                                <LineChartOrdersPrice/>
+                            </div>
                         </div>
                     </div>
                 </>
