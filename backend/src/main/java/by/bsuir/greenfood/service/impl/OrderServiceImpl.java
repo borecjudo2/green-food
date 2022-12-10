@@ -42,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
     OrderEntity orderForCreate = mapper.dtoToEntity(order);
     List<Bag> bagList = bagService.findAllByUserId(order.getUserId());
 
-    orderForCreate.setData(MAPPER.writeValueAsString(bagList));
+    orderForCreate.setData(bagList);
     orderForCreate.setOrderDate(OffsetDateTime.now());
     orderForCreate.setPrice(bagService.sumBags(order.getUserId()));
 

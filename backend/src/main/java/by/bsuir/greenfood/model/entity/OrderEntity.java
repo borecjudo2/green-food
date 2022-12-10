@@ -1,5 +1,6 @@
 package by.bsuir.greenfood.model.entity;
 
+import by.bsuir.greenfood.model.dto.Bag;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,8 +10,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -34,7 +38,8 @@ public class OrderEntity {
   @Column(nullable = false)
   private UUID userId;
 
-  private String data;
+  @JdbcTypeCode(SqlTypes.JSON)
+  private List<Bag> data;
 
   @Column(nullable = false)
   private Double price;

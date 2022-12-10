@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -20,7 +21,7 @@ public class Order {
   @NotNull
   private UUID userId;
 
-  private String data;
+  private List<Bag> data;
 
   private Double price;
 

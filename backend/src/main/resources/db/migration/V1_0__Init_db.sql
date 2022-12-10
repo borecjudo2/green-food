@@ -31,7 +31,7 @@ address varchar(255) not null,
 order_date timestamp not null,
 price float8 not null,
 user_id uuid not null,
-data varchar(65535),
+data jsonb,
 primary key (id));
 
 create table reviews (

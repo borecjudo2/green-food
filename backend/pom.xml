@@ -17,7 +17,7 @@
 		<java.version>17</java.version>
 
 		<mapstruct.version>1.4.2.Final</mapstruct.version>
-		<testcontainers.version>1.17.3</testcontainers.version>
+		<testcontainers.version>1.17.6</testcontainers.version>
 		<postgrees.version>42.5.0</postgrees.version>
 		<lombok-mapstruct.version>0.2.0</lombok-mapstruct.version>
 	</properties>
