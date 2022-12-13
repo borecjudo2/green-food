@@ -7,7 +7,6 @@ import by.bsuir.greenfood.model.entity.OrderEntity;
 import by.bsuir.greenfood.repo.OrderRepository;
 import by.bsuir.greenfood.service.BagService;
 import by.bsuir.greenfood.service.OrderService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,8 +26,6 @@ import java.util.UUID;
 @Service
 @AllArgsConstructor
 public class OrderServiceImpl implements OrderService {
-
-  private static final ObjectMapper MAPPER = new ObjectMapper();
 
   private final OrderMapper mapper;
 
