@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -40,7 +41,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
   @Override
   public User createUser(User user) {
-    getUserByUsername(user.getUsername());
+    Optional<UserEntity> existingUser = repository.findByUsername(user.getUsername());
+
+    if (existingUser.isPresent()) {
+      throw new UsernameNotFoundException("User already exist with username " + user.getUsername());
+    }
 
     UserEntity userForCreate = mapper.dtoToEntity(user);
     userForCreate.setPassword(passwordEncoder.encode(userForCreate.getPassword()));
