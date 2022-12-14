@@ -1,3 +1,7 @@
+# 084371 КАРПЕКО ПСП КП
+
+Пз находится по пути `/docs`
+
 # Green food app
 
 ## Project requirements (should be installed)
