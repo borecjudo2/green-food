@@ -66,7 +66,8 @@ export function DishesPage({setCount, isLogin}: DishProps) {
                 dishType: dishType,
                 description: "",
                 name: name,
-                price: parseFloat(price)
+                price: parseFloat(price),
+                rate:0
             }
             applyDishRequest(dish).then(() => dishesByType(DishType.ALL))
             setIsReadyForOrder(false);
@@ -289,7 +290,9 @@ export function DishesPage({setCount, isLogin}: DishProps) {
                         </div>
                     </div>
                     <div className="grid grid-cols-4 gap-20">
-                        {dishes.map(dish =>
+                        {dishes
+                            .sort((a, b) => (a.price > b.price ? -1 : 1))
+                            .map(dish =>
                             <Dish dish={dish} setCount={setCount} key={dish.id} isLogin={isLogin}/>
                         )}
                     </div>

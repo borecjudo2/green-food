@@ -40,10 +40,10 @@ public class DishController {
     return dishService.createDish(dish);
   }
 
-  @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+  @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.OK)
-  public Dish updateDish(@Valid @RequestBody Dish dish) {
-    return dishService.updateDish(dish);
+  public Dish updateDish(@PathVariable UUID id, @Valid @RequestBody Dish dish) {
+    return dishService.updateDish(id, dish);
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)

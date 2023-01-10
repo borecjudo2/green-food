@@ -5,4 +5,5 @@ export interface IDish {
     description: string,
     name: string,
     price: number,
+    rate: number
 }

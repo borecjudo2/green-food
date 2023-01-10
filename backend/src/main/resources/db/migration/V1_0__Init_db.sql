@@ -17,6 +17,7 @@ dish_type varchar(255) not null,
 description varchar(255) not null,
 name varchar(255) not null,
 price float8 not null,
+rate int4,
 primary key (id));
 
 create table bags (
