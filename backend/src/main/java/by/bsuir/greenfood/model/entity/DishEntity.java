@@ -48,4 +48,6 @@ public class DishEntity {
 
   @Column(nullable = false)
   private Double price;
+
+  private Integer rate;
 }

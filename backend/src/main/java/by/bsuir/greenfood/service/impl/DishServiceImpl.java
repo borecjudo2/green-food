@@ -41,8 +41,8 @@ public class DishServiceImpl implements DishService {
   }
 
   @Override
-  public Dish updateDish(Dish dish) {
-    getDishById(dish.getId());
+  public Dish updateDish(UUID id, Dish dish) {
+    getDishById(id);
 
     DishEntity dishToUpdate = mapper.dtoToEntity(dish);
     return mapper.entityToDto(dishRepository.save(dishToUpdate));

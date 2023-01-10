@@ -1,6 +1,8 @@
 import {IDish} from "../model/Dish";
 import {IOrder} from "../model/Order";
 import axios from "axios";
+import {Rating} from "@mui/material";
+import React, {SyntheticEvent, useState} from "react";
 
 export interface DishProps {
     isLogin: boolean
@@ -21,6 +23,20 @@ export function Dish({isLogin, dish, setCount}: DishProps) {
         await axios.post<IOrder>('http://localhost:8080/users/' + userId + '/dishes/' + dish.id)
     }
 
+    const [dishRate, setDishRate] = useState(dish.rate)
+    const setRateHandler = (event: SyntheticEvent, newValue: number | null) => {
+        if (newValue !== null) {
+            setDishRate(newValue)
+            updateDishRate(dish, newValue).then()
+        }
+        setDishRate(dish.rate)
+    }
+
+    async function updateDishRate(dish: IDish, newRate: number) {
+        dish.rate = newRate
+        await axios.put<IDish>('http://localhost:8080/dishes/' + dish.id, dish)
+    }
+
     return (
         <div className="grid grid-rows-5 h-[300px] border-lime-500">
             <div className="row-span-4 rounded-full">
@@ -37,7 +53,11 @@ export function Dish({isLogin, dish, setCount}: DishProps) {
                 </div>
                 <div className="flex justify-between">
                     <span>
-                        <text className="font-light">Dish type: {dish.dishType}</text>
+                        <Rating
+                            name="simple-controlled"
+                            value={dishRate}
+                            onChange={setRateHandler}
+                        />
                     </span>
                     <span>
                         {isLogin ?

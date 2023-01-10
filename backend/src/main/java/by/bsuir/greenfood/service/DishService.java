@@ -17,7 +17,7 @@ public interface DishService {
 
   Dish createDish(Dish dish);
 
-  Dish updateDish(Dish dish);
+  Dish updateDish(UUID id, Dish dish);
 
   List<Dish> getDishes(DishType dishType);
 

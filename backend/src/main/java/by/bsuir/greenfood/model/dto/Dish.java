@@ -36,4 +36,6 @@ public class Dish implements Serializable {
 
   @NotNull
   private Double price;
+
+  private Integer rate;
 }

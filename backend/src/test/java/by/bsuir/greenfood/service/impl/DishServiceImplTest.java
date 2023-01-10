@@ -75,12 +75,12 @@ class DishServiceImplTest {
 
   @NotNull
   private Dish getDish() {
-    return new Dish(ID, NAME, ICON_URL, DISH_TYPE, DESCRIPTION, PRICE);
+    return new Dish(ID, NAME, ICON_URL, DISH_TYPE, DESCRIPTION, PRICE, 0);
 
   }
 
   @NotNull
   private DishEntity getDishEntity() {
-    return new DishEntity(ID, NAME, ICON_URL, DISH_TYPE, DESCRIPTION, PRICE);
+    return new DishEntity(ID, NAME, ICON_URL, DISH_TYPE, DESCRIPTION, PRICE, 0);
   }
 }
